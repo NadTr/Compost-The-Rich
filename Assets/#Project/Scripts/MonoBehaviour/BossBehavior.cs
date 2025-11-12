@@ -21,7 +21,7 @@ public class BossBehavior : MonoBehaviour
     private float jumpEveryXSecond = 3f;
     [SerializeField] private float jumpEveryXSecondsMin = 3f;
     [SerializeField] private float jumpEveryXSecondsMax = 7f;
-    [SerializeField] private bool goRight = true;
+    [SerializeField] private bool goRight = false;
 
     [Space]
     [Header("Animation")]
