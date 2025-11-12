@@ -6,6 +6,10 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 public class BossBehavior : MonoBehaviour
 {
+
+    [Space]
+    [Header("GamEObjects")]
+    [SerializeField] private Transform player;
     [Header("Movement")]
     private float chrono;
     private float speed;
@@ -48,17 +52,25 @@ public class BossBehavior : MonoBehaviour
         Move();
 
         chrono += Time.deltaTime;
-        
-        if(chrono >= jumpEveryXSecond)
+
+        if (chrono >= jumpEveryXSecond)
         {
             Jump();
             Debug.Log("OnJump");
             Debug.Log(chrono);
         }
-        if(chrono >= 4)
+        if (chrono >= 4)
         {
+            LookAtPlayer();
             ChangeSpeed();
         }
+
+        Vector3 origin = transform.position + Vector3.up * 1.4f + (goRight ? 1f : -1f) * 0.5f * Vector3.right;
+        Vector3 direction = (goRight ? 1f : -1f) * Vector3.right;
+        RaycastHit2D sideHit = Physics2D.Raycast(origin, direction, 0.2f);
+        Debug.DrawRay(origin, direction, Color.cyan);
+
+        if (sideHit.collider != null && sideHit.collider.gameObject.tag == "Wall") InverseSpeed();
 
     }
 
@@ -95,4 +107,16 @@ public class BossBehavior : MonoBehaviour
         animator.SetBool("on jump", true);
         rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
     }
+
+    public void LookAtPlayer()
+	{
+		if (transform.position.x > player.position.x && !spriteRenderer.flipX)
+		{
+			InverseSpeed();
+		}
+		else if (transform.position.x < player.position.x && spriteRenderer.flipX)
+		{
+			InverseSpeed();
+		}
+	}
 }
