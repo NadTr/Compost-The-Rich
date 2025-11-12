@@ -545,8 +545,8 @@ GameObject:
   - component: {fileID: 1570058922}
   - component: {fileID: 1570058924}
   m_Layer: 0
-  m_Name: Player
-  m_TagString: Player
+  m_Name: Boss
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -733,6 +733,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BossBehavior
   speed: 2
   jumpForce: 35
+  jumpEveryXSeconds: 4
   goRight: 1
   hpMax: 100
   damage: 10

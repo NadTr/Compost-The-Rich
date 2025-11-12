@@ -8,6 +8,7 @@ public class BossBehavior : MonoBehaviour
 {
     [SerializeField] private float speed = 2f;
     [SerializeField] private float jumpForce = 35f;
+    [SerializeField] private float jumpEveryXSeconds = 4f;
     [SerializeField] private bool goRight = true;
     [SerializeField] private int hpMax = 100;
     private int hp;
@@ -16,6 +17,7 @@ public class BossBehavior : MonoBehaviour
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        hp = hpMax;
     }
     void Update()
     {
