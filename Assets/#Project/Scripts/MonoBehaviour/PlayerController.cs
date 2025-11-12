@@ -16,9 +16,9 @@ public class PlayerController : MonoBehaviour
     private const string ACTION_MAP = "Player";
     // [SerializeField] private UIManager uI;
     [SerializeField] private InputActionAsset actions;
-    private InputAction xAxis;
+    private InputAction move;
     [SerializeField] private float speed = 3f;
-    [SerializeField] private float jumpForce = 5f;
+    [SerializeField] private float jumpForce = 25f;
     private bool isJumping = false;
     private bool isCrouching = false;
     [SerializeField] private SpriteRenderer spriteRenderer;
@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         coll = GetComponent<Collider2D>();
 
-        xAxis = actions.FindActionMap(ACTION_MAP).FindAction("MoveX");
+        move = actions.FindActionMap(ACTION_MAP).FindAction("Move");
         hp = hpMax;
     }
     public void Update()
@@ -76,16 +76,18 @@ public class PlayerController : MonoBehaviour
 
     private void MoveX()
     {
-        spriteRenderer.flipX = xAxis.ReadValue<float>() < 0;
+        Vector2 movement = move.ReadValue<Vector2>();
+        spriteRenderer.flipX = movement.x < 0;
 
         if (isCrouching) return;
         // Debug.Log(speed + tmpSpeed);
         // transform.Translate(xAxis.ReadValue<float>() * (speed + tmpSpeed) * Time.deltaTime, 0f, 0f);
-        transform.position += Vector3.right * (xAxis.ReadValue<float>() * speed) * Time.deltaTime;
-        animator.SetFloat("speed", Math.Abs(xAxis.ReadValue<float>()));
+        transform.position += Vector3.right * (movement.x * speed) * Time.deltaTime;
+        animator.SetFloat("speed", Math.Abs(movement.x));
     }
     private void OnJump(InputAction.CallbackContext callbackContext)
     {
+        if (isJumping) return;
         animator.SetBool("on jump", true);
         isJumping = true;
         rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
