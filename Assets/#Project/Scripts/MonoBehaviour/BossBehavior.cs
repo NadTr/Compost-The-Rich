@@ -1,16 +1,44 @@
+using System;
+// using System.Numerics;
+using UnityEditor.EditorTools;
 using UnityEngine;
 
+[RequireComponent(typeof(SpriteRenderer))]
 public class BossBehavior : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [SerializeField] private float speed = 2f;
+    [SerializeField] private float jumpForce = 35f;
+    [SerializeField] private bool goRight = true;
+    [SerializeField] private int hpMax = 100;
+    private int hp;
+    [SerializeField] private int damage = 10;
+    private SpriteRenderer spriteRenderer;
     void Start()
     {
-        
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
-
-    // Update is called once per frame
     void Update()
     {
-        
+        Move();
+
+
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Wall" || collision.gameObject.tag == "Enemy")
+        {
+            InverseSpeed();
+        }
+    }
+
+    private void InverseSpeed()
+    {
+        goRight = !goRight;
+        spriteRenderer.flipX = !spriteRenderer.flipX;
+    }
+    private void Move()
+    {
+        transform.Translate((goRight ? 1f : -1f) * speed * Time.deltaTime, 0f, 0f);
     }
 }

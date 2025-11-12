@@ -1,16 +1,16 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class MenuStart : MonoBehaviour
+public class ButtonClick : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+   public void OnPlayButton ()
     {
-        
+        SceneManager.LoadScene("Fight1");
     }
-
-    // Update is called once per frame
-    void Update()
+    // Called when we click the "Quit" button.
+    public void OnQuitButton ()
     {
-        
+        Application.Quit();
     }
 }
