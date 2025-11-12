@@ -4,12 +4,13 @@ using UnityEditor.EditorTools;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
-public class BossBehavior : MonoBehaviour
+public class BossBehaviorState : MonoBehaviour
 {
 
     [Space]
-    [Header("GamEObjects")]
+    [Header("GameObjects")]
     [SerializeField] private Transform player;
+
     [Header("Movement")]
     private float chrono;
     private float speed;
@@ -18,9 +19,11 @@ public class BossBehavior : MonoBehaviour
     private float jumpForce;
     [SerializeField] private float jumpForceMin = 15f;
     [SerializeField] private float jumpForceMax = 50f;
-    private float jumpEveryXSecond = 3f;
-    [SerializeField] private float jumpEveryXSecondsMin = 3f;
-    [SerializeField] private float jumpEveryXSecondsMax = 7f;
+    private string[] allBehaviors = { "walk", "slow_attack", "jump_attack", "fast_attack"};
+    private string state;
+    private float stateChangeEveryXSeconds = 3f;
+    [SerializeField] private float stateChangeEveryXSecondsMin = 3f;
+    [SerializeField] private float stateChangeEveryXSecondsMax = 7f;
     [SerializeField] private bool goRight = true;
 
     [Space]
@@ -44,25 +47,41 @@ public class BossBehavior : MonoBehaviour
         chrono = 0;
         speed = speedMin;
         jumpForce = jumpForceMin;
-        jumpEveryXSecond = jumpEveryXSecondsMin;
+        stateChangeEveryXSeconds = stateChangeEveryXSecondsMin;
         hp = hpMax;
     }
     void Update()
     {
+
         Move();
 
         chrono += Time.deltaTime;
 
-        if (chrono >= jumpEveryXSecond)
+        if (chrono >= stateChangeEveryXSeconds)
         {
-            Jump();
-            Debug.Log("OnJump");
-            Debug.Log(chrono);
+            chrono = 0;
+            stateChangeEveryXSeconds = UnityEngine.Random.Range(stateChangeEveryXSecondsMin, stateChangeEveryXSecondsMax);
+
+            state = allBehaviors[UnityEngine.Random.Range(0, allBehaviors.Length)];
+            Debug.Log($"state = {state}");
+            switch (state)
+        {
+            case "walk":
+                Move();
+                break;
+            case "slow_attack":
+                ChangeSpeed();
+                break;
+            case "jump_attack":
+                Jump();
+                break;
+            case "fast_attack":
+                ChangeSpeed();
+                break;
+            default:
+                Move();
+                break;
         }
-        if (chrono >= 4)
-        {
-            LookAtPlayer();
-            ChangeSpeed();
         }
 
         Vector3 origin = transform.position + Vector3.up * 1.4f + (goRight ? 1f : -1f) * 0.5f * Vector3.right;
@@ -72,40 +91,6 @@ public class BossBehavior : MonoBehaviour
 
         if (sideHit.collider != null && sideHit.collider.gameObject.tag == "Wall") InverseSpeed();
 
-    }
-
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Wall")
-        {
-            InverseSpeed();
-        }
-    }
-
-    private void InverseSpeed()
-    {
-        goRight = !goRight;
-        spriteRenderer.flipX = !spriteRenderer.flipX;
-    }
-    private void Move()
-    {
-        animator.SetFloat("speed", Math.Abs(speed));
-        transform.Translate((goRight ? 1f : -1f) * speed * Time.deltaTime, 0f, 0f);
-    }
-
-    private void ChangeSpeed()
-    { 
-        speed = UnityEngine.Random.Range(speedMin, speedMax);
-    }
-
-    private void Jump()
-    {
-        chrono = 0;
-        jumpForce = UnityEngine.Random.Range(jumpForceMin, jumpForceMax);
-        jumpEveryXSecond = UnityEngine.Random.Range(jumpEveryXSecondsMin, jumpEveryXSecondsMax);
-
-        animator.SetBool("on jump", true);
-        rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
     }
 
     public void LookAtPlayer()
@@ -119,4 +104,30 @@ public class BossBehavior : MonoBehaviour
 			InverseSpeed();
 		}
 	}
+    private void Move()
+    {
+        animator.SetFloat("speed", Math.Abs(speed));
+        transform.Translate((goRight ? 1f : -1f) * speed * Time.deltaTime, 0f, 0f);
+    }
+    private void InverseSpeed()
+    {
+        goRight = !goRight;
+        spriteRenderer.flipX = !spriteRenderer.flipX;
+    }
+
+    private void ChangeSpeed()
+    {
+        LookAtPlayer();
+        speed = UnityEngine.Random.Range(speedMin, speedMax);
+    }
+
+    private void Jump()
+    {
+        LookAtPlayer();
+        jumpForce = UnityEngine.Random.Range(jumpForceMin, jumpForceMax);
+
+        animator.SetBool("on jump", true);
+        rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
+    }
+
 }
