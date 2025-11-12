@@ -83,7 +83,6 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Floor")
         {
-            Debug.Log("Touch floor");
             isJumping = false;
             animator.SetBool("on jump", false);
         }
