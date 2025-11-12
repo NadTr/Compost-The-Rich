@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+
 // using System.Numerics;
 using NUnit.Framework.Internal;
 using UnityEditor.EditorTools;
@@ -37,6 +39,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private int damage = 10;
 
     GameObject attack;
+    bool isAttackActive;
     
     void OnEnable()
     {
@@ -64,6 +67,7 @@ public class PlayerController : MonoBehaviour
 
         move = actions.FindActionMap(ACTION_MAP).FindAction("Move");
         hp = hpMax;
+        isAttackActive = false;
     }
     public void Update()
     {
@@ -107,9 +111,16 @@ public class PlayerController : MonoBehaviour
     private void Attack(InputAction.CallbackContext callbackContext)
     {
         animator.SetBool("attack", true);
-        // StartCoroutine Attack
-        attack.SetActive(true);
+        // StartCoroutine(ActiveAttack(0.3f));
+        Invoke("ActiveAttackHitBox", 0.2f);
+        Invoke("ActiveAttackHitBox", 1.5f);
     }
+    private void ActiveAttackHitBox()
+    {
+        isAttackActive = !isAttackActive;
+        attack.SetActive(isAttackActive);
+    }
+
     private void OnCrouch(InputAction.CallbackContext callbackContext)
     {
         speed *= 0.5f;

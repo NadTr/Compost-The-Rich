@@ -6,6 +6,10 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 public class BossBehavior : MonoBehaviour
 {
+
+    [Space]
+    [Header("GamEObjects")]
+    [SerializeField] private Transform player;
     [Header("Movement")]
     private float chrono;
     private float speed;
@@ -57,6 +61,7 @@ public class BossBehavior : MonoBehaviour
         }
         if(chrono >= 4)
         {
+            LookAtPlayer();
             ChangeSpeed();
         }
 
@@ -95,4 +100,16 @@ public class BossBehavior : MonoBehaviour
         animator.SetBool("on jump", true);
         rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
     }
+
+    public void LookAtPlayer()
+	{
+		if (transform.position.x > player.position.x && !spriteRenderer.flipX)
+		{
+			InverseSpeed();
+		}
+		else if (transform.position.x < player.position.x && spriteRenderer.flipX)
+		{
+			InverseSpeed();
+		}
+	}
 }
