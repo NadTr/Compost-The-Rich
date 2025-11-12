@@ -13,6 +13,7 @@ using UnityEngine.SocialPlatforms.Impl;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Movement")]
     private const string ACTION_MAP = "Player";
     // [SerializeField] private UIManager uI;
     [SerializeField] private InputActionAsset actions;
@@ -21,18 +22,27 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpForce = 25f;
     private bool isJumping = false;
     private bool isCrouching = false;
+
+    [Space]
+    [Header("Animation")]
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Animator animator;
     private Rigidbody2D rb;
     private Collider2D coll;
-    [SerializeField] private int hpMax = 100;
+
+    [Space]
+    [Header("Health")]
     private int hp;
-    // [SerializeField] private int hpLostByContact;
+    [SerializeField] private int hpMax = 100;
     [SerializeField] private int damage = 10;
+
+    GameObject attack;
+    
     void OnEnable()
     {
         actions.FindActionMap(ACTION_MAP).Enable();
         actions.FindActionMap(ACTION_MAP).FindAction("Jump").performed += OnJump;
+        actions.FindActionMap(ACTION_MAP).FindAction("Attack").performed += Attack;
         actions.FindActionMap(ACTION_MAP).FindAction("Crouch").performed += OnCrouch;
         actions.FindActionMap(ACTION_MAP).FindAction("Crouch").canceled += OnStandUp;
     }
@@ -40,6 +50,7 @@ public class PlayerController : MonoBehaviour
     {
         actions.FindActionMap(ACTION_MAP).Disable();
         actions.FindActionMap(ACTION_MAP).FindAction("Jump").performed -= OnJump;
+        actions.FindActionMap(ACTION_MAP).FindAction("Attack").performed -= Attack;
         actions.FindActionMap(ACTION_MAP).FindAction("Crouch").performed -= OnCrouch;
         actions.FindActionMap(ACTION_MAP).FindAction("Crouch").canceled -= OnStandUp;
     }
@@ -49,6 +60,7 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         coll = GetComponent<Collider2D>();
+        attack = transform.GetChild(0).gameObject;
 
         move = actions.FindActionMap(ACTION_MAP).FindAction("Move");
         hp = hpMax;
@@ -91,6 +103,12 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("on jump", true);
         isJumping = true;
         rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
+    }
+    private void Attack(InputAction.CallbackContext callbackContext)
+    {
+        animator.SetBool("attack", true);
+        // StartCoroutine Attack
+        attack.SetActive(true);
     }
     private void OnCrouch(InputAction.CallbackContext callbackContext)
     {
