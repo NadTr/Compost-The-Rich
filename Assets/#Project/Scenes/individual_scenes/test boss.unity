@@ -731,10 +731,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: faf637b93c61990428900b29a19886d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BossBehavior
-  speed: 2
-  jumpForce: 35
-  jumpEveryXSeconds: 4
+  speedMin: 2
+  speedMax: 8
+  jumpForceMin: 20
+  jumpForceMax: 80
+  jumpEveryXSecondsMin: 2
+  jumpEveryXSecondsMax: 5
   goRight: 1
+  spriteRenderer: {fileID: 1570058919}
+  animator: {fileID: 1570058923}
   hpMax: 100
   damage: 10
 --- !u!1 &1997029924

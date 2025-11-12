@@ -7,9 +7,14 @@ using UnityEngine;
 public class BossBehavior : MonoBehaviour
 {
     [Header("Movement")]
-    [SerializeField] private float speed = 2f;
+    private float chrono;
+    private float speed;
+    [SerializeField] private float speedMin = 2f;
+    [SerializeField] private float speedMax = 6f;
+    private float jumpForce;
     [SerializeField] private float jumpForceMin = 15f;
     [SerializeField] private float jumpForceMax = 50f;
+    private float jumpEveryXSecond = 3f;
     [SerializeField] private float jumpEveryXSecondsMin = 3f;
     [SerializeField] private float jumpEveryXSecondsMax = 7f;
     [SerializeField] private bool goRight = true;
@@ -30,18 +35,36 @@ public class BossBehavior : MonoBehaviour
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        rb = GetComponent<Rigidbody2D>();
+
+        chrono = 0;
+        speed = speedMin;
+        jumpForce = jumpForceMin;
+        jumpEveryXSecond = jumpEveryXSecondsMin;
         hp = hpMax;
     }
     void Update()
     {
         Move();
 
+        chrono += Time.deltaTime;
+        
+        if(chrono >= jumpEveryXSecond)
+        {
+            Jump();
+            Debug.Log("OnJump");
+            Debug.Log(chrono);
+        }
+        if(chrono >= 4)
+        {
+            ChangeSpeed();
+        }
 
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Wall" || collision.gameObject.tag == "Enemy")
+        if (collision.gameObject.tag == "Wall")
         {
             InverseSpeed();
         }
@@ -54,6 +77,22 @@ public class BossBehavior : MonoBehaviour
     }
     private void Move()
     {
+        animator.SetFloat("speed", Math.Abs(speed));
         transform.Translate((goRight ? 1f : -1f) * speed * Time.deltaTime, 0f, 0f);
+    }
+
+    private void ChangeSpeed()
+    { 
+        speed = UnityEngine.Random.Range(speedMin, speedMax);
+    }
+
+    private void Jump()
+    {
+        chrono = 0;
+        jumpForce = UnityEngine.Random.Range(jumpForceMin, jumpForceMax);
+        jumpEveryXSecond = UnityEngine.Random.Range(jumpEveryXSecondsMin, jumpEveryXSecondsMax);
+
+        animator.SetBool("on jump", true);
+        rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
     }
 }
