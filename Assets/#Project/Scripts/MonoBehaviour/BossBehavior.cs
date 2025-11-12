@@ -6,14 +6,27 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 public class BossBehavior : MonoBehaviour
 {
+    [Header("Movement")]
     [SerializeField] private float speed = 2f;
-    [SerializeField] private float jumpForce = 35f;
-    [SerializeField] private float jumpEveryXSeconds = 4f;
+    [SerializeField] private float jumpForceMin = 15f;
+    [SerializeField] private float jumpForceMax = 50f;
+    [SerializeField] private float jumpEveryXSecondsMin = 3f;
+    [SerializeField] private float jumpEveryXSecondsMax = 7f;
     [SerializeField] private bool goRight = true;
-    [SerializeField] private int hpMax = 100;
+
+    [Space]
+    [Header("Animation")]
+    [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private Animator animator;
+    private Rigidbody2D rb;
+    private Collider2D coll;
+    
+    [Space]
+    [Header("Health")]
     private int hp;
+    [SerializeField] private int hpMax = 100;
     [SerializeField] private int damage = 10;
-    private SpriteRenderer spriteRenderer;
+    
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
