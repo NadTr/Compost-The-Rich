@@ -44,8 +44,8 @@ public class PlayerController : MonoBehaviour
     [Header("PlayerData")]
     [SerializeField] private PlayerData playerData;
 
-
-    private int hp;
+    private HealthBar playerHealthBar;
+    private int currentHealth;
     GameObject attack;
     bool isAttackActive;
     
@@ -75,8 +75,10 @@ public class PlayerController : MonoBehaviour
         coll = GetComponent<Collider2D>();
         attack = transform.GetChild(0).gameObject;
 
+        playerHealthBar = GetComponent<HealthBar>();
+
         move = actions.FindActionMap(ACTION_MAP).FindAction("Move");
-        hp = playerData.hpMax;
+        currentHealth = playerData.maxHealth;
         isAttackActive = false;
     }
     public void Update()
@@ -92,10 +94,16 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("on fall", false);
         }
         if (collision.gameObject.tag == "Boss")
-        {
-            // this.hp -= collision.gameObject.damage;
-            hurtSound.Play();
-        }
+            {
+                BossBehavior boss = collision.gameObject.GetComponent<BossBehavior>();
+                    
+                if (boss != null && playerHealthBar != null)
+                {
+                    playerHealthBar.TakeDamage(boss.GetDamage());
+                    hurtSound.Play();
+                }
+            }
+
     }
 
 
@@ -159,9 +167,15 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Boss")
+        if (collision.gameObject.tag == "Boss" && isAttackActive)
         {
-            // this.hp -= collision.gameObject.damage;
+            HealthBar bossHealthBar = collision.gameObject.GetComponent<HealthBar>();
+            
+            if (bossHealthBar != null)
+            {
+                bossHealthBar.TakeDamage(playerData.damage);
+                Debug.Log("Boss hit! Damage: " + playerData.damage);
+            }
         }
 
     }

@@ -398,10 +398,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd5db339253337c45975816ce314e1fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthBar
-  healthBar: {fileID: 0}
+  healthBar: {fileID: 1040664804}
   maxHealth: 100
   currentHealth: 0
-  damageAmount: 10
   gameOverSceneName: GameOver
   winSceneName: Win
 --- !u!1 &679527729
@@ -585,10 +584,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd5db339253337c45975816ce314e1fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthBar
-  healthBar: {fileID: 0}
+  healthBar: {fileID: 1657063817}
   maxHealth: 100
   currentHealth: 0
-  damageAmount: 10
   gameOverSceneName: GameOver
   winSceneName: Win
 --- !u!4 &803607694
@@ -874,10 +872,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd5db339253337c45975816ce314e1fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthBar
-  healthBar: {fileID: 0}
+  healthBar: {fileID: 1657063817}
   maxHealth: 100
   currentHealth: 0
-  damageAmount: 10
   gameOverSceneName: GameOver
   winSceneName: Win
 --- !u!1 &1636439902
@@ -1245,10 +1242,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd5db339253337c45975816ce314e1fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthBar
-  healthBar: {fileID: 0}
+  healthBar: {fileID: 1040664804}
   maxHealth: 100
   currentHealth: 0
-  damageAmount: 10
   gameOverSceneName: GameOver
   winSceneName: Win
 --- !u!4 &2008447185
