@@ -20,10 +20,11 @@ public class PlayerController : MonoBehaviour
     // [SerializeField] private UIManager uI;
     [SerializeField] private InputActionAsset actions;
     private InputAction move;
-    [SerializeField] private float speed = 3f;
-    [SerializeField] private float jumpForce = 25f;
+    private float speed = 3f;
     private bool isJumping = false;
+    private int numberOfJumps = 2;
     private bool isCrouching = false;
+    private bool frontDirectionRight = false;
 
     [Space]
     [Header("Animation")]
@@ -33,11 +34,11 @@ public class PlayerController : MonoBehaviour
     private Collider2D coll;
 
     [Space]
-    [Header("Health")]
-    private int hp;
-    [SerializeField] private int hpMax = 100;
-    [SerializeField] private int damage = 10;
+    [Header("PlayerData")]
+    [SerializeField] private PlayerData playerData;
 
+
+    private int hp;
     GameObject attack;
     bool isAttackActive;
     
@@ -59,6 +60,8 @@ public class PlayerController : MonoBehaviour
     }
     public void Start()
     {
+        speed = playerData.speed;
+
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
@@ -66,24 +69,19 @@ public class PlayerController : MonoBehaviour
         attack = transform.GetChild(0).gameObject;
 
         move = actions.FindActionMap(ACTION_MAP).FindAction("Move");
-        hp = hpMax;
+        hp = playerData.hpMax;
         isAttackActive = false;
     }
     public void Update()
     {
         MoveX();
-        if (isJumping)
-        {
-            Vector3 origin = transform.position + Vector3.down * 0.9f;
-            Vector3 direction = Vector3.down * 2f;
-        }
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Floor")
         {
-            isJumping = false;
+            numberOfJumps = 2;
             animator.SetBool("on jump", false);
         }
     }
@@ -92,20 +90,24 @@ public class PlayerController : MonoBehaviour
     private void MoveX()
     {
         Vector2 movement = move.ReadValue<Vector2>();
-        spriteRenderer.flipX = movement.x < 0;
+
+        frontDirectionRight = movement.x > 0f ? false : (movement.x < 0f ? true : frontDirectionRight);
+        spriteRenderer.flipX = frontDirectionRight;
 
         if (isCrouching) return;
-        // Debug.Log(speed + tmpSpeed);
-        // transform.Translate(xAxis.ReadValue<float>() * (speed + tmpSpeed) * Time.deltaTime, 0f, 0f);
+
         transform.position += Vector3.right * (movement.x * speed) * Time.deltaTime;
         animator.SetFloat("speed", Math.Abs(movement.x));
     }
     private void OnJump(InputAction.CallbackContext callbackContext)
     {
-        if (isJumping) return;
+        if (numberOfJumps <= 0) return;
+
+        if (numberOfJumps > 1) rb.AddForce(transform.up * playerData.firstJumpForce, ForceMode2D.Impulse);
+        if (numberOfJumps <= 1) rb.AddForce(transform.up * playerData.secondJumpForce, ForceMode2D.Impulse);
+        
         animator.SetBool("on jump", true);
-        isJumping = true;
-        rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
+        numberOfJumps--;
     }
     private void Attack(InputAction.CallbackContext callbackContext)
     {
