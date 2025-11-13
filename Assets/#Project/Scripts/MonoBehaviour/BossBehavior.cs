@@ -32,10 +32,11 @@ public class BossBehavior : MonoBehaviour
     
     [Space]
     [Header("Health")]
-    private int hp;
-    [SerializeField] private int hpMax = 100;
-    [SerializeField] private int damage = 10;
+    private HealthBar healthComponent;
+    // [SerializeField] private int hpMax = 100;
+    // [SerializeField] private int damage = 10;
     
+
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -45,7 +46,7 @@ public class BossBehavior : MonoBehaviour
         speed = speedMin;
         jumpForce = jumpForceMin;
         jumpEveryXSecond = jumpEveryXSecondsMin;
-        hp = hpMax;
+        healthComponent = GetComponent<HealthBar>();
     }
     void Update()
     {
@@ -73,7 +74,24 @@ public class BossBehavior : MonoBehaviour
         if (sideHit.collider != null && sideHit.collider.gameObject.tag == "Wall") InverseSpeed();
 
     }
-
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Attack")
+        {
+            Transform parentTransform = collision.transform.parent;
+            
+            if (parentTransform != null)
+            {
+                HealthBar attackerHealth = parentTransform.GetComponent<HealthBar>();
+                
+                if (attackerHealth != null)
+                {
+                    Debug.Log($"Boss hit! Taking {attackerHealth.damageAmount} damage");
+                    healthComponent.TakeDamage(attackerHealth.damageAmount);
+                }
+            }
+        }
+    }
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Wall")

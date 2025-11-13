@@ -37,7 +37,9 @@ public class PlayerController : MonoBehaviour
     [Header("PlayerData")]
     [SerializeField] private PlayerData playerData;
 
-
+    [Space]
+    [Header("Health")]
+    private HealthBar healthComponent;
     private int hp;
     GameObject attack;
     bool isAttackActive;
@@ -69,7 +71,7 @@ public class PlayerController : MonoBehaviour
         attack = transform.GetChild(0).gameObject;
 
         move = actions.FindActionMap(ACTION_MAP).FindAction("Move");
-        hp = playerData.hpMax;
+        healthComponent = GetComponent<HealthBar>();
         isAttackActive = false;
     }
     public void Update()
@@ -139,7 +141,13 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Boss")
         {
-            // this.hp -= collision.gameObject.damage;
+            Debug.Log("Player touched Boss!");
+            HealthBar bossHealth = collision.gameObject.GetComponent<HealthBar>();
+
+            if (bossHealth != null)
+            {
+                healthComponent.TakeDamage(bossHealth.damageAmount);
+            }
         }
 
     }
