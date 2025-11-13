@@ -1,48 +1,163 @@
-main{
+:root {
+    --green-dark: #4a7c59;
+    --green-light: #7fb069;
+    --blue-sky: #87ceeb;
+    --brown-earth: #8b6f47;
+    --blue-dark: #1a2332;
+    --purple-dark: #2d1b3d;
+    --red-danger: #d64545;
+    --orange-bright: #ff6b35;
+    --beige-light: #f4f1de;
+    --gray-dark: #3d3d3d;
+    --black: #1a1a1a;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto Slab', serif;
+    background: linear-gradient(180deg, var(--blue-dark) 0%, var(--gray-dark) 100%);
+    color: var(--beige-light);
+    min-height: 100vh;
+}
+
+
+main {
+    width: 90%;
+    max-width: 1200px;
+    margin: 2rem auto;
+    background: linear-gradient(135deg, rgba(77, 124, 89, 1) 0%, rgba(29, 35, 50, 1) 100%);
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    border: 3px solid var(--green-dark);
+}
+
+header {
+    text-align: center;
+    padding: 3rem 2rem;
+    background: linear-gradient(135deg, var(--green-dark) 0%, var(--blue-dark) 100%);
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+        content: '🌱';
+        position: absolute;
+        font-size: 15rem;
+        opacity: 0.1;
+        top: -30px;
+        right: -50px;
+        transform: rotate(-15deg);
+    }
+}
+
+h1 {
+    font-family: 'Bangers', cursive;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    color: var(--orange-bright);
+    text-shadow:
+        3px 3px 0 var(--black),
+        -1px -1px 0 var(--green-light),
+        4px 4px 10px rgba(255, 107, 53, 0.5);
+    letter-spacing: 3px;
+    margin-bottom: 1rem;
+    animation: pulse 2s ease-in-out infinite;
+
+
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.02);
+    }
+}
+
+header p {
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    color: var(--beige-light);
+    font-weight: 300;
+    max-width: 700px;
+    margin: 0 auto;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+#presentation {
+    padding: 3rem 2rem;
+    background: rgba(26, 35, 50, 0.6);
+    border-bottom: 2px solid var(--green-dark);
+}
+
+#presentation p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    color: var(--beige-light);
+}
+
+#presentation a {
+    color: var(--green-light);
+    font-weight: bold;
+    text-decoration: none;
+    border-bottom: 2px solid var(--green-light);
+    transition: all 0.3s ease;
+}
+
+/*
+main {
     width: 75%;
     margin: auto;
     background-color: rgb(227, 227, 227);
     padding-bottom: 3em
 }
 
-header{
+header {
     text-align: center;
     padding: 1em;
-    background-color:rgb(183, 183, 183) ;
+    background-color: rgb(183, 183, 183);
 }
 
-#presentation{
+#presentation {
     width: 90%;
     margin: 1em auto;
     padding: 1.5em;
     font-size: 0.8em;
 }
 
-#pitch{
+#pitch {
     width: 75%;
     margin: auto;
     padding: 1em;
     background-color: white;
 }
 
-#pitch a{
+#pitch a {
     text-decoration: none;
 }
 
-#carouselReward{
+#carouselReward {
     width: 75%;
     margin: auto;
 }
 
 .carousel-item {
-  background-color: #222;
-  color: white;
-  padding: 3rem;
-  min-height: 300px;
-  text-align: center;
+    background-color: #222;
+    color: white;
+    padding: 3rem;
+    min-height: 300px;
+    text-align: center;
 }
 
-#game{
+#game {
     width: 75%;
     margin: auto;
     padding: 1em;
@@ -52,7 +167,8 @@ header{
     background-repeat: no-repeat;
     background-position: center;
 }
-#game p{
+
+#game p {
     font-size: 2em;
     font-weight: bolder;
     color: red;
