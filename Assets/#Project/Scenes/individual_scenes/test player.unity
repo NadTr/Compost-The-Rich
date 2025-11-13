@@ -322,17 +322,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BossBehaviorState
   player: {fileID: 1570058920}
-  speedMin: 2
-  speedMax: 5
-  jumpForceMin: 100
-  jumpForceMax: 300
-  stateChangeEveryXSecondsMin: 3
-  stateChangeEveryXSecondsMax: 6
-  goRight: 0
   spriteRenderer: {fileID: 1660769272}
   animator: {fileID: 1660769270}
-  hpMax: 100
-  damage: 10
+  bossData: {fileID: 11400000, guid: bba6577a09e016d4c94c6fad1866c4d3, type: 2}
 --- !u!1 &1997029924
 GameObject:
   m_ObjectHideFlags: 0

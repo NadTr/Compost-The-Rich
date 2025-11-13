@@ -11,44 +11,42 @@ public class BossBehaviorState : MonoBehaviour
     [Header("GameObjects")]
     [SerializeField] private Transform player;
 
-    [Header("Movement")]
-    private float chrono;
-    private float speed;
-    [SerializeField] private float speedMin = 2f;
-    [SerializeField] private float speedMax = 6f;
-    private float jumpForce;
-    [SerializeField] private float jumpForceMin = 15f;
-    [SerializeField] private float jumpForceMax = 50f;
-    private string[] allBehaviors = { "walk", "slow_attack", "jump_attack", "fast_attack"};
-    private string state;
-    private float stateChangeEveryXSeconds = 3f;
-    [SerializeField] private float stateChangeEveryXSecondsMin = 3f;
-    [SerializeField] private float stateChangeEveryXSecondsMax = 7f;
-    [SerializeField] private bool goRight = true;
 
     [Space]
     [Header("Animation")]
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Animator animator;
-    private Rigidbody2D rb;
-    private Collider2D coll;
     
     [Space]
-    [Header("Health")]
+    [Header("BossData")]
+    [SerializeField] private BossData bossData;
+
+    
+    // [Header("Movement")]
+    private float chrono;
+    private float speed;
+    private float jumpForce;
+    private string[] allBehaviors = { "walk", "slow_attack", "jump_attack", "fast_attack"};
+    private string state;
+    private float stateChangeEveryXSeconds = 3f;
+    private bool goRight;
+
+    private Rigidbody2D rb;
+    private Collider2D coll;
     private int hp;
-    [SerializeField] private int hpMax = 100;
-    [SerializeField] private int damage = 10;
+
     
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
+        this.goRight = bossData.goRight;
 
         chrono = 0;
-        speed = speedMin;
-        jumpForce = jumpForceMin;
-        stateChangeEveryXSeconds = stateChangeEveryXSecondsMin;
-        hp = hpMax;
+        speed = bossData.speedMin;
+        jumpForce = bossData.jumpForceMin;
+        stateChangeEveryXSeconds = bossData.stateChangeEveryXSecondsMin;
+        hp = bossData.hpMax;
     }
     void Update()
     {
@@ -60,7 +58,7 @@ public class BossBehaviorState : MonoBehaviour
         if (chrono >= stateChangeEveryXSeconds)
         {
             chrono = 0;
-            stateChangeEveryXSeconds = UnityEngine.Random.Range(stateChangeEveryXSecondsMin, stateChangeEveryXSecondsMax);
+            stateChangeEveryXSeconds = UnityEngine.Random.Range(bossData.stateChangeEveryXSecondsMin, bossData.stateChangeEveryXSecondsMax);
 
             state = allBehaviors[UnityEngine.Random.Range(0, allBehaviors.Length)];
             Debug.Log($"state = {state}");
@@ -95,11 +93,11 @@ public class BossBehaviorState : MonoBehaviour
 
     public void LookAtPlayer()
 	{
-		if (transform.position.x > player.position.x && !spriteRenderer.flipX)
+		if (transform.position.x > player.position.x && spriteRenderer.flipX)
 		{
 			InverseSpeed();
 		}
-		else if (transform.position.x < player.position.x && spriteRenderer.flipX)
+		else if (transform.position.x < player.position.x && !spriteRenderer.flipX)
 		{
 			InverseSpeed();
 		}
@@ -118,13 +116,13 @@ public class BossBehaviorState : MonoBehaviour
     private void ChangeSpeed()
     {
         LookAtPlayer();
-        speed = UnityEngine.Random.Range(speedMin, speedMax);
+        speed = UnityEngine.Random.Range(bossData.speedMin, bossData.speedMax);
     }
 
     private void Jump()
     {
         LookAtPlayer();
-        jumpForce = UnityEngine.Random.Range(jumpForceMin, jumpForceMax);
+        jumpForce = UnityEngine.Random.Range(bossData.jumpForceMin, bossData.jumpForceMax);
 
         animator.SetBool("on jump", true);
         rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
