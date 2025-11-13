@@ -32,6 +32,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Animator animator;
     private Rigidbody2D rb;
     private Collider2D coll;
+    [Space]
+
+    [Header("Sounds")]
+    [SerializeField] private AudioSource jumpSound;
+    [SerializeField] private AudioSource attackSound;
+    [SerializeField] private AudioSource hurtSound;
+    [SerializeField] private AudioSource dieSound;
 
     [Space]
     [Header("PlayerData")]
@@ -84,6 +91,11 @@ public class PlayerController : MonoBehaviour
             numberOfJumps = 2;
             animator.SetBool("on jump", false);
         }
+        if (collision.gameObject.tag == "Boss")
+        {
+            // this.hp -= collision.gameObject.damage;
+            hurtSound.Play();
+        }
     }
 
 
@@ -107,6 +119,7 @@ public class PlayerController : MonoBehaviour
         if (numberOfJumps <= 1) rb.AddForce(transform.up * playerData.secondJumpForce, ForceMode2D.Impulse);
         
         animator.SetBool("on jump", true);
+        jumpSound.Play();
         numberOfJumps--;
     }
     private void Attack(InputAction.CallbackContext callbackContext)
@@ -114,6 +127,7 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("attack", true);
         // StartCoroutine(ActiveAttack(0.3f));
         Invoke("ActiveAttackHitBox", 0.2f);
+        attackSound.Play();
         Invoke("ActiveAttackHitBox", 1.5f);
     }
     private void ActiveAttackHitBox()
