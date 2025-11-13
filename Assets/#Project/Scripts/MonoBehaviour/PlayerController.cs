@@ -22,7 +22,9 @@ public class PlayerController : MonoBehaviour
     private InputAction move;
     private float speed = 3f;
     private bool isJumping = false;
+    private int numberOfJumps = 2;
     private bool isCrouching = false;
+    private bool frontDirectionRight = false;
 
     [Space]
     [Header("Animation")]
@@ -35,7 +37,7 @@ public class PlayerController : MonoBehaviour
     [Header("PlayerData")]
     [SerializeField] private PlayerData playerData;
 
-    
+
     private int hp;
     GameObject attack;
     bool isAttackActive;
@@ -73,18 +75,13 @@ public class PlayerController : MonoBehaviour
     public void Update()
     {
         MoveX();
-        if (isJumping)
-        {
-            Vector3 origin = transform.position + Vector3.down * 0.9f;
-            Vector3 direction = Vector3.down * 2f;
-        }
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Floor")
         {
-            isJumping = false;
+            numberOfJumps = 2;
             animator.SetBool("on jump", false);
         }
     }
@@ -93,7 +90,9 @@ public class PlayerController : MonoBehaviour
     private void MoveX()
     {
         Vector2 movement = move.ReadValue<Vector2>();
-        spriteRenderer.flipX = movement.x < 0;
+
+        frontDirectionRight = movement.x > 0f ? false : (movement.x < 0f ? true : frontDirectionRight);
+        spriteRenderer.flipX = frontDirectionRight;
 
         if (isCrouching) return;
 
@@ -102,10 +101,13 @@ public class PlayerController : MonoBehaviour
     }
     private void OnJump(InputAction.CallbackContext callbackContext)
     {
-        if (isJumping) return;
+        if (numberOfJumps <= 0) return;
+
         animator.SetBool("on jump", true);
-        isJumping = true;
-        rb.AddForce(transform.up * playerData.jumpForce, ForceMode2D.Impulse);
+        numberOfJumps--;
+        Debug.Log($"number of jumps {numberOfJumps}, jump forece : {playerData.firstJumpForce}");
+        if (numberOfJumps > 1) rb.AddForce(transform.up * playerData.firstJumpForce, ForceMode2D.Impulse);
+        if (numberOfJumps <= 1) rb.AddForce(transform.up * playerData.secondJumpForce, ForceMode2D.Impulse);
     }
     private void Attack(InputAction.CallbackContext callbackContext)
     {

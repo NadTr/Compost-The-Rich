@@ -4,8 +4,10 @@ using UnityEngine;
 public class PlayerData : ScriptableObject
 {
     [Header("Movement")]
+    [SerializeField] public bool frontDirectionRight = true;
     [SerializeField] public float speed = 3f;
-    [SerializeField] public float jumpForce = 25f;
+    [SerializeField] public float firstJumpForce = 220f;
+    [SerializeField] public float secondJumpForce = 50f;
 
     [Space]
     [Header("Health")]
