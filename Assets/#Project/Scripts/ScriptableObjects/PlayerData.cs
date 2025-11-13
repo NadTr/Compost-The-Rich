@@ -4,12 +4,11 @@ using UnityEngine;
 public class PlayerData : ScriptableObject
 {
     [Header("Movement")]
-    [SerializeField] private float speed = 3f;
-    [SerializeField] private float jumpForce = 25f;
+    [SerializeField] public float speed = 3f;
+    [SerializeField] public float jumpForce = 25f;
 
     [Space]
     [Header("Health")]
-    private int hp;
-    [SerializeField] private int hpMax = 100;
-    [SerializeField] private int damage = 10;
+    [SerializeField] public int hpMax = 100;
+    [SerializeField] public int damage = 10;
 }

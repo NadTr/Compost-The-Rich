@@ -542,6 +542,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7339428108433800246, guid: bbea93c2b39bae54782de401258bc18d, type: 3}
+      propertyPath: playerData
+      value: 
+      objectReference: {fileID: 11400000, guid: 4932c9cf7ca55f74f90c4afdf8d11f99, type: 2}
     - target: {fileID: 7522770107687573476, guid: bbea93c2b39bae54782de401258bc18d, type: 3}
       propertyPath: m_Name
       value: Player

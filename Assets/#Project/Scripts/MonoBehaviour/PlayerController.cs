@@ -20,8 +20,7 @@ public class PlayerController : MonoBehaviour
     // [SerializeField] private UIManager uI;
     [SerializeField] private InputActionAsset actions;
     private InputAction move;
-    [SerializeField] private float speed = 3f;
-    [SerializeField] private float jumpForce = 25f;
+    private float speed = 3f;
     private bool isJumping = false;
     private bool isCrouching = false;
 
@@ -33,11 +32,11 @@ public class PlayerController : MonoBehaviour
     private Collider2D coll;
 
     [Space]
-    [Header("Health")]
-    private int hp;
-    [SerializeField] private int hpMax = 100;
-    [SerializeField] private int damage = 10;
+    [Header("PlayerData")]
+    [SerializeField] private PlayerData playerData;
 
+    
+    private int hp;
     GameObject attack;
     bool isAttackActive;
     
@@ -59,6 +58,8 @@ public class PlayerController : MonoBehaviour
     }
     public void Start()
     {
+        speed = playerData.speed;
+
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
@@ -66,7 +67,7 @@ public class PlayerController : MonoBehaviour
         attack = transform.GetChild(0).gameObject;
 
         move = actions.FindActionMap(ACTION_MAP).FindAction("Move");
-        hp = hpMax;
+        hp = playerData.hpMax;
         isAttackActive = false;
     }
     public void Update()
@@ -95,8 +96,7 @@ public class PlayerController : MonoBehaviour
         spriteRenderer.flipX = movement.x < 0;
 
         if (isCrouching) return;
-        // Debug.Log(speed + tmpSpeed);
-        // transform.Translate(xAxis.ReadValue<float>() * (speed + tmpSpeed) * Time.deltaTime, 0f, 0f);
+
         transform.position += Vector3.right * (movement.x * speed) * Time.deltaTime;
         animator.SetFloat("speed", Math.Abs(movement.x));
     }
@@ -105,7 +105,7 @@ public class PlayerController : MonoBehaviour
         if (isJumping) return;
         animator.SetBool("on jump", true);
         isJumping = true;
-        rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
+        rb.AddForce(transform.up * playerData.jumpForce, ForceMode2D.Impulse);
     }
     private void Attack(InputAction.CallbackContext callbackContext)
     {
