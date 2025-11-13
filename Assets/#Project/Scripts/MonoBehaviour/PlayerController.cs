@@ -103,11 +103,11 @@ public class PlayerController : MonoBehaviour
     {
         if (numberOfJumps <= 0) return;
 
-        animator.SetBool("on jump", true);
-        numberOfJumps--;
-        Debug.Log($"number of jumps {numberOfJumps}, jump forece : {playerData.firstJumpForce}");
         if (numberOfJumps > 1) rb.AddForce(transform.up * playerData.firstJumpForce, ForceMode2D.Impulse);
         if (numberOfJumps <= 1) rb.AddForce(transform.up * playerData.secondJumpForce, ForceMode2D.Impulse);
+        
+        animator.SetBool("on jump", true);
+        numberOfJumps--;
     }
     private void Attack(InputAction.CallbackContext callbackContext)
     {
