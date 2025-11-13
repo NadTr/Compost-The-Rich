@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5513b8e1f468084086d0f4be330552f, type: 3}
   m_Name: PlayerData_1
   m_EditorClassIdentifier: Assembly-CSharp::PlayerData
-  speed: 3
-  jumpForce: 25
+  frontDirectionRight: 1
+  speed: 3.5
+  firstJumpForce: 220
+  secondJumpForce: 50
   hpMax: 100
   damage: 10
