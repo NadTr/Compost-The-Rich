@@ -89,7 +89,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "Floor")
         {
             numberOfJumps = 2;
-            animator.SetBool("on jump", false);
+            animator.SetBool("on fall", false);
         }
         if (collision.gameObject.tag == "Boss")
         {
@@ -120,11 +120,18 @@ public class PlayerController : MonoBehaviour
         
         animator.SetBool("on jump", true);
         jumpSound.Play();
+        Invoke("PlayerFall", 0.5f);
+
         numberOfJumps--;
+    }
+    private void PlayerFall()
+    {
+        animator.SetBool("on jump", false);
+        animator.SetBool("on fall", true);
+        
     }
     private void Attack(InputAction.CallbackContext callbackContext)
     {
-        animator.SetBool("attack", true);
         // StartCoroutine(ActiveAttack(0.3f));
         Invoke("ActiveAttackHitBox", 0.2f);
         attackSound.Play();
@@ -133,6 +140,7 @@ public class PlayerController : MonoBehaviour
     private void ActiveAttackHitBox()
     {
         isAttackActive = !isAttackActive;
+        animator.SetBool("on attack", isAttackActive);
         attack.SetActive(isAttackActive);
     }
 
