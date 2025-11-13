@@ -137,7 +137,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Boss")
         {
-            // this.hp = collision.gameObject.damage;
+            // this.hp -= collision.gameObject.damage;
         }
 
     }
