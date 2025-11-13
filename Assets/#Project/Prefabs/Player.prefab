@@ -31,8 +31,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 4, y: 4, z: 2}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1236516906274628748}
   m_Father: {fileID: 0}
@@ -129,7 +129,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.07788519, y: -0.041724145}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -139,7 +139,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.18776925, y: 0.34539396}
   m_EdgeRadius: 0
 --- !u!95 &4148142120518150709
 Animator:
@@ -151,7 +151,7 @@ Animator:
   m_GameObject: {fileID: 7522770107687573476}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d827589bbd8ab8a468bbdc903490d7cb, type: 2}
+  m_Controller: {fileID: 9100000, guid: 7e51d029973a4da449865dd94317338e, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -203,12 +203,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
-  speed: 3
-  jumpForce: 240
   spriteRenderer: {fileID: 1757266769630346766}
   animator: {fileID: 4148142120518150709}
-  hpMax: 100
-  damage: 10
+  jumpSound: {fileID: 0}
+  attackSound: {fileID: 0}
+  hurtSound: {fileID: 0}
+  dieSound: {fileID: 0}
+  playerData: {fileID: 11400000, guid: 4932c9cf7ca55f74f90c4afdf8d11f99, type: 2}
 --- !u!1 &9163359232523175457
 GameObject:
   m_ObjectHideFlags: 0
@@ -275,7 +276,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.5524292, y: 0.04159546}
+  m_Offset: {x: 0.07825105, y: 0.022560973}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -285,5 +286,5 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.63171387, y: 0.5366821}
+  m_Size: {x: 0.16273353, y: 0.08863988}
   m_EdgeRadius: 0
