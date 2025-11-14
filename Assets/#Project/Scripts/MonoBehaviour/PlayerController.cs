@@ -50,12 +50,8 @@ public class PlayerController : MonoBehaviour
     private Vector2 decalAttack;
     GameObject attack;
     bool isAttackActive;
-<<<<<<< HEAD
     bool canAttack = true; 
     
-=======
-
->>>>>>> 17cbf81be2f7a1a0c4820e040d095f6092f402af
     void OnEnable()
     {
         actions.FindActionMap(ACTION_MAP).Enable();
