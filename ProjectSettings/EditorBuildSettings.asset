@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/#Project/Scenes/#Prod/Menu_Start.unity
     guid: 9aed9f0862ee4874ea41b641b5dc487c
   - enabled: 1
+    path: Assets/#Project/Scenes/#Prod/Menu_Before_Fight1.unity
+    guid: bec7692a3a0367a4d8229859bafe2f8e
+  - enabled: 1
     path: Assets/#Project/Scenes/#Prod/Fight1.unity
     guid: d9219183fc947974386376798533cef8
   - enabled: 1
