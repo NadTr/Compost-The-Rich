@@ -126,4 +126,5 @@ public class BossBehavior : MonoBehaviour
     {
         return damage;
     }
+    
 }
