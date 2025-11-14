@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-using UnityEditor.EditorTools;
+// using UnityEditor.EditorTools;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
@@ -74,7 +74,7 @@ public class BossBS2 : MonoBehaviour
             stateChangeEveryXSeconds = UnityEngine.Random.Range(bossData.stateChangeEveryXSecondsMin, bossData.stateChangeEveryXSecondsMax);
             state = allBehaviors[UnityEngine.Random.Range(0, allBehaviors.Length)];
 
-            Debug.Log($"state = {state}");
+            // Debug.Log($"state = {state}");
             switch (state)
             {
                 case "walk":

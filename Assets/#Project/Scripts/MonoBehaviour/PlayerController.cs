@@ -2,11 +2,11 @@ using System;
 using System.Collections;
 
 // using System.Numerics;
-using NUnit.Framework.Internal;
-using UnityEditor.EditorTools;
+// using NUnit.Framework.Internal;
+// using UnityEditor.EditorTools;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SocialPlatforms.Impl;
+// using UnityEngine.SocialPlatforms.Impl;
 
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(Animator))]
@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
     private int numberOfJumps = 2;
     private bool isCrouching = false;
     private bool frontDirectionRight = false;
+    private BossBS2 boss;
 
     [Space]
     [Header("Animation")]
@@ -95,14 +96,20 @@ public class PlayerController : MonoBehaviour
             numberOfJumps = 2;
             animator.SetBool("on fall", false);
         }
-
         if (collision.gameObject.tag == "Boss")
         {
             BossBS2 boss = collision.gameObject.GetComponent<BossBS2>();
             if (boss != null && playerHealthBar != null)
             {
-                playerHealthBar.TakeDamage(boss.GetDamage());
-                hurtSound.Play();
+                // Debug.Log("Entered collision with boss");
+                boss = collision.gameObject.GetComponent<BossBS2>();
+                // Debug.Log($"{boss != null} - {playerHealthBar != null}");
+
+                if (boss != null && playerHealthBar != null)
+                {
+                    playerHealthBar.TakeDamage(boss.GetDamage());
+                    hurtSound.Play();
+                }
             }
         }
 

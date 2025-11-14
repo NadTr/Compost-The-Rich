@@ -1,6 +1,6 @@
 using System;
 // using System.Numerics;
-using UnityEditor.EditorTools;
+// using UnityEditor.EditorTools;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
@@ -70,7 +70,7 @@ public class BossBehavior : MonoBehaviour
         Vector3 origin = transform.position + Vector3.up * 1.4f + (goRight ? 1f : -1f) * 0.5f * Vector3.right;
         Vector3 direction = (goRight ? 1f : -1f) * Vector3.right;
         RaycastHit2D sideHit = Physics2D.Raycast(origin, direction, 0.2f);
-        Debug.DrawRay(origin, direction, Color.cyan);
+        // Debug.DrawRay(origin, direction, Color.cyan);
 
         if (sideHit.collider != null && sideHit.collider.gameObject.tag == "Wall") InverseSpeed();
 
