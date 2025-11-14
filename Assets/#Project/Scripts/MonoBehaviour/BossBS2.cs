@@ -1,41 +1,44 @@
 using System;
-// using System.Numerics;
+using System.Collections;
 using UnityEditor.EditorTools;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
-public class BossBehaviorState : MonoBehaviour
+public class BossBS2 : MonoBehaviour
 {
 
     [Space]
     [Header("GameObjects")]
     [SerializeField] private Transform player;
+    [SerializeField] private GameObject tesla;
 
 
     [Space]
     [Header("Animation")]
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Animator animator;
-    
+
     [Space]
     [Header("BossData")]
     [SerializeField] private BossData bossData;
 
-    
+
     // [Header("Movement")]
     private float chrono;
     private float speed;
     private float jumpForce;
-    private string[] allBehaviors = { "walk", "slow_attack", "jump_attack", "fast_attack"};
+    private string[] allBehaviors = { "walk", "slow_attack", "jump_attack", "fast_attack", "normal" };
     private string state;
     private float stateChangeEveryXSeconds = 3f;
     private bool goRight;
+    private bool stopping = false;
 
     private Rigidbody2D rb;
     private Collider2D coll;
+
     private int hp;
 
-    
+
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -50,17 +53,28 @@ public class BossBehaviorState : MonoBehaviour
     }
     void Update()
     {
-
-        Move();
+        if (!stopping) Move();
 
         chrono += Time.deltaTime;
 
-        if (chrono >= stateChangeEveryXSeconds)
+        Vector3 origin = transform.position + (goRight ? 1f : -1f) * 0.5f * Vector3.right;
+        Vector3 direction = (goRight ? 1f : -1f) * Vector3.right;
+        RaycastHit2D sideHit = Physics2D.Raycast(origin, direction, 0.8f);
+        Debug.DrawRay(origin, direction, Color.cyan);
+
+        if (sideHit.collider.gameObject.tag != "Wall" && sideHit.collider.gameObject.tag == "Player")
+        {
+            Debug.Log("Entered sideHit collision");
+            state = "slow_attack";
+            tesla.SetActive(true);
+            StartCoroutine(SlowAttack());
+        }
+        else if (chrono >= stateChangeEveryXSeconds)
         {
             chrono = 0;
             stateChangeEveryXSeconds = UnityEngine.Random.Range(bossData.stateChangeEveryXSecondsMin, bossData.stateChangeEveryXSecondsMax);
-
             state = allBehaviors[UnityEngine.Random.Range(0, allBehaviors.Length)];
+
             Debug.Log($"state = {state}");
             switch (state)
             {
@@ -68,7 +82,8 @@ public class BossBehaviorState : MonoBehaviour
                     Move();
                     break;
                 case "slow_attack":
-                    ChangeSpeed();
+                    tesla.SetActive(true);
+                    StartCoroutine(SlowAttack());
                     break;
                 case "jump_attack":
                     Jump();
@@ -76,32 +91,27 @@ public class BossBehaviorState : MonoBehaviour
                 case "fast_attack":
                     ChangeSpeed();
                     break;
-                default:
+                case "normal":
                     Move();
                     break;
             }
         }
-
-        Vector3 origin = transform.position + Vector3.up * 1.4f + (goRight ? 1f : -1f) * 0.5f * Vector3.right;
-        Vector3 direction = (goRight ? 1f : -1f) * Vector3.right;
-        RaycastHit2D sideHit = Physics2D.Raycast(origin, direction, 0.2f);
-        Debug.DrawRay(origin, direction, Color.cyan);
 
         if (sideHit.collider != null && sideHit.collider.gameObject.tag == "Wall") InverseSpeed();
 
     }
 
     public void LookAtPlayer()
-	{
-		if (transform.position.x > player.position.x && spriteRenderer.flipX)
-		{
-			InverseSpeed();
-		}
-		else if (transform.position.x < player.position.x && !spriteRenderer.flipX)
-		{
-			InverseSpeed();
-		}
-	}
+    {
+        if (transform.position.x > player.position.x && spriteRenderer.flipX)
+        {
+            InverseSpeed();
+        }
+        else if (transform.position.x < player.position.x && !spriteRenderer.flipX)
+        {
+            InverseSpeed();
+        }
+    }
     private void Move()
     {
         animator.SetFloat("speed", Math.Abs(speed));
@@ -126,6 +136,14 @@ public class BossBehaviorState : MonoBehaviour
 
         animator.SetBool("on jump", true);
         rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
+    }
+
+    private IEnumerator SlowAttack()
+    {
+        stopping = true;
+        // Debug.Log("stopping = " + stopping);
+        yield return new WaitForSeconds(2.2f);
+        stopping = false;
     }
 
 }

@@ -11,6 +11,6 @@ public class PlayerData : ScriptableObject
 
     [Space]
     [Header("Health")]
-    [SerializeField] public int hpMax = 100;
+    [SerializeField] public int maxHealth = 100;
     [SerializeField] public int damage = 10;
 }

@@ -44,8 +44,9 @@ public class PlayerController : MonoBehaviour
     [Header("PlayerData")]
     [SerializeField] private PlayerData playerData;
 
-
-    private int hp;
+    private HealthBar playerHealthBar;
+    private int currentHealth;
+    private Vector2 decalAttack;
     GameObject attack;
     bool isAttackActive;
     
@@ -75,9 +76,12 @@ public class PlayerController : MonoBehaviour
         coll = GetComponent<Collider2D>();
         attack = transform.GetChild(0).gameObject;
 
+        playerHealthBar = GetComponent<HealthBar>();
+
         move = actions.FindActionMap(ACTION_MAP).FindAction("Move");
-        hp = playerData.hpMax;
+        currentHealth = playerData.maxHealth;
         isAttackActive = false;
+        decalAttack = attack.transform.localPosition;
     }
     public void Update()
     {
@@ -92,10 +96,16 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("on fall", false);
         }
         if (collision.gameObject.tag == "Boss")
-        {
-            // this.hp -= collision.gameObject.damage;
-            hurtSound.Play();
-        }
+            {
+                BossBehavior boss = collision.gameObject.GetComponent<BossBehavior>();
+                    
+                if (boss != null && playerHealthBar != null)
+                {
+                    playerHealthBar.TakeDamage(boss.GetDamage());
+                    hurtSound.Play();
+                }
+            }
+
     }
 
 
@@ -142,6 +152,10 @@ public class PlayerController : MonoBehaviour
         isAttackActive = !isAttackActive;
         animator.SetBool("on attack", isAttackActive);
         attack.SetActive(isAttackActive);
+        if(isAttackActive){
+            float factor = GetComponent<SpriteRenderer>().flipX ? -1 : 1;
+            attack.transform.localPosition = new Vector2(decalAttack.x * factor, decalAttack.y);
+        }
     }
 
     private void OnCrouch(InputAction.CallbackContext callbackContext)
@@ -159,9 +173,14 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Boss")
+        if (collision.gameObject.tag == "Boss" && isAttackActive)
         {
-            // this.hp -= collision.gameObject.damage;
+            HealthBar bossHealthBar = collision.gameObject.GetComponent<HealthBar>();
+            
+            if (bossHealthBar != null)
+            {
+                bossHealthBar.TakeDamage(playerData.damage);
+            }
         }
 
     }
