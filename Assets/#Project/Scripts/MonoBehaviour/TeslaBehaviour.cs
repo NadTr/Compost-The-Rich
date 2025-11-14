@@ -1,31 +1,34 @@
+using System;
 using System.Collections;
+using System.Threading.Tasks;
+
 // using System.Numerics;
 using UnityEngine;
 
 public class TeslaBehaviour : MonoBehaviour
 {
-    private Vector3 startPosition;
     private Vector3 distanceToMusk;
     [SerializeField] BossBS2 musk;
 
     void OnEnable()
     {
-        startPosition = transform.position;
-        distanceToMusk = startPosition - transform.parent.position;
+        float factor = transform.parent.GetComponent<SpriteRenderer>().flipX ? -1 : 1;
+        Vector2 localPos = transform.localPosition;
 
+        distanceToMusk = localPos;
+
+        localPos.x *= factor;
+        transform.localPosition = localPos;
+        // Debug.Log("startPosition = " + startPosition + "ou " + transform.position);
+        // Debug.Log("transform.parent.position = " + transform.parent.position);
+        // Debug.Log("distanceToMusk = " + distanceToMusk);
     }
 
     void OnDisable()
     {
-        bool result = musk.GetGoRight();
-        if (result == false)
-        {
-            transform.position = transform.parent.position - distanceToMusk;
-        }
-        else
-        {
-            transform.position = -transform.position + distanceToMusk;
-        }
+        float factor = transform.parent.GetComponent<SpriteRenderer>().flipX ? -1 : 1;
+        Vector2 localPos = distanceToMusk;
+        transform.localPosition = localPos;
     }
 
     void OnCollisionEnter2D(Collision2D collision)
