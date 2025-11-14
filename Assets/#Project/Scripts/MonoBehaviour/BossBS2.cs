@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-using UnityEditor.EditorTools;
+// using UnityEditor.EditorTools;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
@@ -60,9 +60,9 @@ public class BossBS2 : MonoBehaviour
         Vector3 origin = transform.position + (goRight ? 1f : -1f) * 0.5f * Vector3.right;
         Vector3 direction = (goRight ? 1f : -1f) * Vector3.right;
         RaycastHit2D sideHit = Physics2D.Raycast(origin, direction, 0.8f);
-        Debug.DrawRay(origin, direction, Color.cyan);
+        // Debug.DrawRay(origin, direction, Color.cyan);
 
-        if (sideHit.collider.gameObject.tag != "Wall" && sideHit.collider.gameObject.tag == "Player")
+        if (sideHit.collider != null && sideHit.collider.gameObject.tag != "Wall" && sideHit.collider.gameObject.tag == "Player")
         {
             state = "slow_attack";
             tesla.SetActive(true);
@@ -74,7 +74,7 @@ public class BossBS2 : MonoBehaviour
             stateChangeEveryXSeconds = UnityEngine.Random.Range(bossData.stateChangeEveryXSecondsMin, bossData.stateChangeEveryXSecondsMax);
             state = allBehaviors[UnityEngine.Random.Range(0, allBehaviors.Length)];
 
-            Debug.Log($"state = {state}");
+            // Debug.Log($"state = {state}");
             switch (state)
             {
                 case "walk":

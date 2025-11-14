@@ -2,11 +2,11 @@ using System;
 using System.Collections;
 
 // using System.Numerics;
-using NUnit.Framework.Internal;
-using UnityEditor.EditorTools;
+// using NUnit.Framework.Internal;
+// using UnityEditor.EditorTools;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SocialPlatforms.Impl;
+// using UnityEngine.SocialPlatforms.Impl;
 
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(Animator))]
@@ -95,13 +95,13 @@ public class PlayerController : MonoBehaviour
             numberOfJumps = 2;
             animator.SetBool("on fall", false);
         }
-        Debug.Log("Tag: " + collision.gameObject.tag);
-        Debug.Log("Name: " + collision.gameObject.name);
+        // Debug.Log("Tag: " + collision.gameObject.tag);
+        // Debug.Log("Name: " + collision.gameObject.name);
         if (collision.gameObject.tag == "Boss")
             {
-                Debug.Log("Entered collision with boss");
+                // Debug.Log("Entered collision with boss");
                 BossBS2 boss = collision.gameObject.GetComponent<BossBS2>();
-                Debug.Log($"{boss != null} - {playerHealthBar != null}");
+                // Debug.Log($"{boss != null} - {playerHealthBar != null}");
                     
                 if (boss != null && playerHealthBar != null)
                 {
