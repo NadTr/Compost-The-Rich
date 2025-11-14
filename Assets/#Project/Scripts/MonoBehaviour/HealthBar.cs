@@ -10,8 +10,8 @@ public class HealthBar : MonoBehaviour
     public float currentHealth;
     
     [Header("Scenes")]
-    public string gameOverSceneName = "GameOver";
-    public string winSceneName = "Win";
+    public string gameOverSceneName = "Menu_Game_Over";
+    public string winSceneName = "Menu_Victory";
     
     void Start()
     {
@@ -53,11 +53,11 @@ public class HealthBar : MonoBehaviour
     {
         if (gameObject.CompareTag("Player"))
         {
-            SceneManager.LoadScene("GameOver");
+            SceneManager.LoadScene("Menu_Game_Over");
         }
         else if (gameObject.CompareTag("Boss"))
         {
-            SceneManager.LoadScene("Win");
+            SceneManager.LoadScene("Menu_Victory");
             Destroy(gameObject);
         }
     }

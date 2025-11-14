@@ -95,9 +95,13 @@ public class PlayerController : MonoBehaviour
             numberOfJumps = 2;
             animator.SetBool("on fall", false);
         }
+        Debug.Log("Tag: " + collision.gameObject.tag);
+        Debug.Log("Name: " + collision.gameObject.name);
         if (collision.gameObject.tag == "Boss")
             {
-                BossBehavior boss = collision.gameObject.GetComponent<BossBehavior>();
+                Debug.Log("Entered collision with boss");
+                BossBS2 boss = collision.gameObject.GetComponent<BossBS2>();
+                Debug.Log($"{boss != null} - {playerHealthBar != null}");
                     
                 if (boss != null && playerHealthBar != null)
                 {
