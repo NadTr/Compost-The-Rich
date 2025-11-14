@@ -70,8 +70,6 @@ h1 {
     letter-spacing: 3px;
     margin-bottom: 1rem;
     animation: pulse 2s ease-in-out infinite;
-
-
 }
 
 @keyframes pulse {
@@ -322,69 +320,4 @@ header p {
 
 #pitch {
     animation: fadeInUp 0.8s ease-out 0.4s both;
-}
-
-
-
-                    /* CSS de base Laura */ 
-/*
-main {
-    width: 75%;
-    margin: auto;
-    background-color: rgb(227, 227, 227);
-    padding-bottom: 3em
-}
-
-header {
-    text-align: center;
-    padding: 1em;
-    background-color: rgb(183, 183, 183);
-}
-
-#presentation {
-    width: 90%;
-    margin: 1em auto;
-    padding: 1.5em;
-    font-size: 0.8em;
-}
-
-#pitch {
-    width: 75%;
-    margin: auto;
-    padding: 1em;
-    background-color: white;
-}
-
-#pitch a {
-    text-decoration: none;
-}
-
-#carouselReward {
-    width: 75%;
-    margin: auto;
-}
-
-.carousel-item {
-    background-color: #222;
-    color: white;
-    padding: 3rem;
-    min-height: 300px;
-    text-align: center;
-}
-
-#game {
-    width: 75%;
-    margin: auto;
-    padding: 1em;
-    text-align: center;
-    background-image: url(img/compost.jpg);
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-
-#game p {
-    font-size: 2em;
-    font-weight: bolder;
-    color: red;
 }
