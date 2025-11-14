@@ -426,7 +426,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.CanvasScaler
   m_UiScaleMode: 0
   m_ReferencePixelsPerUnit: 100
-  m_ScaleFactor: 1
+  m_ScaleFactor: 0.29
   m_ReferenceResolution: {x: 800, y: 600}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
@@ -764,11 +764,6 @@ RectTransform:
   m_AnchoredPosition: {x: -2173, y: -200}
   m_SizeDelta: {x: 220, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &1115631026 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3158598614974440902, guid: e5c71cbe3a18f8646af9a0b67fbba68b, type: 3}
-  m_PrefabInstance: {fileID: 6633566447779111353}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1115631029 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3814994310650688786, guid: e5c71cbe3a18f8646af9a0b67fbba68b, type: 3}
@@ -940,7 +935,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -390.99963, y: -200}
+  m_AnchoredPosition: {x: -391, y: -200}
   m_SizeDelta: {x: 220, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1287860645
@@ -986,16 +981,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1661093476248806481, guid: 9b0c3a59c6017e04098c92071e9d84ec, type: 3}
   m_PrefabInstance: {fileID: 2142981826}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &1487962187 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 7243164485535756846, guid: 9b0c3a59c6017e04098c92071e9d84ec, type: 3}
-  m_PrefabInstance: {fileID: 2142981826}
-  m_PrefabAsset: {fileID: 0}
---- !u!212 &1487962189 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 3531399491932541629, guid: 9b0c3a59c6017e04098c92071e9d84ec, type: 3}
-  m_PrefabInstance: {fileID: 2142981826}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1487962193
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1018,23 +1003,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1651568591959412721, guid: 9b0c3a59c6017e04098c92071e9d84ec, type: 3}
   m_PrefabInstance: {fileID: 2142981826}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1487962198
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1487962184}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1333879b15e2054697e5e35b2bef9c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BossBS2
-  player: {fileID: 559329672}
-  tesla: {fileID: 1115631026}
-  spriteRenderer: {fileID: 1487962189}
-  animator: {fileID: 1487962187}
-  bossData: {fileID: 11400000, guid: bba6577a09e016d4c94c6fad1866c4d3, type: 2}
 --- !u!1 &1636439902
 GameObject:
   m_ObjectHideFlags: 0
@@ -1206,7 +1174,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -390.99963, y: -200}
+  m_AnchoredPosition: {x: -391, y: -200}
   m_SizeDelta: {x: 220, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1657063817
@@ -1471,6 +1439,10 @@ PrefabInstance:
       propertyPath: m_GravityScale
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 7232666275462449727, guid: 9b0c3a59c6017e04098c92071e9d84ec, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 559329672}
     - target: {fileID: 7243164485535756846, guid: 9b0c3a59c6017e04098c92071e9d84ec, type: 3}
       propertyPath: m_Controller
       value: 
@@ -1527,9 +1499,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1661093476248806481, guid: 9b0c3a59c6017e04098c92071e9d84ec, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1487962193}
-    - targetCorrespondingSourceObject: {fileID: 1661093476248806481, guid: 9b0c3a59c6017e04098c92071e9d84ec, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1487962198}
   m_SourcePrefab: {fileID: 100100000, guid: 9b0c3a59c6017e04098c92071e9d84ec, type: 3}
 --- !u!1001 &6633566447779111353
 PrefabInstance:
@@ -1586,7 +1555,7 @@ PrefabInstance:
     - target: {fileID: 8150183238496321453, guid: e5c71cbe3a18f8646af9a0b67fbba68b, type: 3}
       propertyPath: musk
       value: 
-      objectReference: {fileID: 1487962198}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
