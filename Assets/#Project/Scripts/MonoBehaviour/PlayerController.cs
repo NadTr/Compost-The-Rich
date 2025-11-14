@@ -50,8 +50,8 @@ public class PlayerController : MonoBehaviour
     private Vector2 decalAttack;
     GameObject attack;
     bool isAttackActive;
-    bool canAttack = true; 
-    
+    bool canAttack = true;
+
     void OnEnable()
     {
         actions.FindActionMap(ACTION_MAP).Enable();
@@ -105,9 +105,9 @@ public class PlayerController : MonoBehaviour
             if (boss != null && playerHealthBar != null)
             {
                 // Debug.Log("Entered collision with boss");
-                BossBS2 boss = collision.gameObject.GetComponent<BossBS2>();
+                boss = collision.gameObject.GetComponent<BossBS2>();
                 // Debug.Log($"{boss != null} - {playerHealthBar != null}");
-                    
+
                 if (boss != null && playerHealthBar != null)
                 {
                     playerHealthBar.TakeDamage(boss.GetDamage());
@@ -151,13 +151,13 @@ public class PlayerController : MonoBehaviour
     }
     private void Attack(InputAction.CallbackContext callbackContext)
     {
-        if (canAttack) 
+        if (canAttack)
         {
             // StartCoroutine(ActiveAttack(0.3f));
             Invoke("ActiveAttackHitBox", 0.2f);
             attackSound.Play();
             Invoke("ActiveAttackHitBox", 1.5f);
-            canAttack =false; 
+            canAttack = false;
             StartCoroutine(Cooldown());
         }
 
@@ -207,5 +207,5 @@ public class PlayerController : MonoBehaviour
         canAttack = true;
     }
 
-    
+
 }
