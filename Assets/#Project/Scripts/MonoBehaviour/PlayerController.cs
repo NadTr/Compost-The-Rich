@@ -97,6 +97,7 @@ public class PlayerController : MonoBehaviour
         }
         if (collision.gameObject.tag == "Boss")
             {
+                Debug.Log("Entered collision with boss");
                 BossBehavior boss = collision.gameObject.GetComponent<BossBehavior>();
                     
                 if (boss != null && playerHealthBar != null)
