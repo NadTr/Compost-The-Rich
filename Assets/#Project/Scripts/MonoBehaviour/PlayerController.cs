@@ -174,7 +174,6 @@ public class PlayerController : MonoBehaviour
             if (bossHealthBar != null)
             {
                 bossHealthBar.TakeDamage(playerData.damage);
-                Debug.Log("Boss hit! Damage: " + playerData.damage);
             }
         }
 

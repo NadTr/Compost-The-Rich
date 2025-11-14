@@ -16,7 +16,7 @@ public class HealthBar : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
-        UpdateHealthBar();
+        // UpdateHealthBar();
     }
     
     void Update()
@@ -53,31 +53,11 @@ public class HealthBar : MonoBehaviour
     {
         if (gameObject.CompareTag("Player"))
         {
-            Debug.Log("Game Over...");
-            
-            if (!string.IsNullOrEmpty(gameOverSceneName))
-            {
-                SceneManager.LoadScene(gameOverSceneName);
-            }
-            else
-            {
-                Debug.Log("GameOver scene name is not set");
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            }
+            SceneManager.LoadScene("GameOver");
         }
         else if (gameObject.CompareTag("Boss"))
         {
-            Debug.Log("You Win!!!!!");
-            
-            if (!string.IsNullOrEmpty(winSceneName))
-            {
-                SceneManager.LoadScene(winSceneName);
-            }
-            else
-            {
-                Debug.Log("Win scene name is not set");
-            }
-            
+            SceneManager.LoadScene("Win");
             Destroy(gameObject);
         }
     }
