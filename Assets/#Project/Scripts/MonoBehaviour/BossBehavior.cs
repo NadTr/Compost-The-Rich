@@ -58,8 +58,8 @@ public class BossBehavior : MonoBehaviour
         if (chrono >= jumpEveryXSecond)
         {
             Jump();
-            Debug.Log("OnJump");
-            Debug.Log(chrono);
+            // Debug.Log("OnJump");
+            // Debug.Log(chrono);
         }
         if (chrono >= 4)
         {
