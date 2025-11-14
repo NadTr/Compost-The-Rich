@@ -49,7 +49,7 @@ public class BossBS2 : MonoBehaviour
         speed = bossData.speedMin;
         jumpForce = bossData.jumpForceMin;
         stateChangeEveryXSeconds = bossData.stateChangeEveryXSecondsMin;
-        hp = bossData.hpMax;
+        hp = bossData.maxHealth;
     }
     void Update()
     {
