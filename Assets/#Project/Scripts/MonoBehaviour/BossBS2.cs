@@ -62,7 +62,7 @@ public class BossBS2 : MonoBehaviour
         RaycastHit2D sideHit = Physics2D.Raycast(origin, direction, 0.8f);
         // Debug.DrawRay(origin, direction, Color.cyan);
 
-        if (sideHit.collider.gameObject != null && sideHit.collider.gameObject.tag != "Wall" && sideHit.collider.gameObject.tag == "Player")
+        if (sideHit.collider != null && sideHit.collider.gameObject.tag != "Wall" && sideHit.collider.gameObject.tag == "Player")
         {
             state = "slow_attack";
             tesla.SetActive(true);
