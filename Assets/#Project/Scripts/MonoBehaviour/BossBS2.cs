@@ -64,7 +64,6 @@ public class BossBS2 : MonoBehaviour
 
         if (sideHit.collider.gameObject.tag != "Wall" && sideHit.collider.gameObject.tag == "Player")
         {
-            Debug.Log("Entered sideHit collision");
             state = "slow_attack";
             tesla.SetActive(true);
             StartCoroutine(SlowAttack());
@@ -145,5 +144,11 @@ public class BossBS2 : MonoBehaviour
         yield return new WaitForSeconds(2.2f);
         stopping = false;
     }
+
+    public int GetDamage()
+    {
+        return bossData.damage;
+    }
+    
 
 }
