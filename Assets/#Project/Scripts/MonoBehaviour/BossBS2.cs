@@ -49,7 +49,7 @@ public class BossBS2 : MonoBehaviour
         speed = bossData.speedMin;
         jumpForce = bossData.jumpForceMin;
         stateChangeEveryXSeconds = bossData.stateChangeEveryXSecondsMin;
-        hp = bossData.hpMax;
+        hp = bossData.maxHealth;
     }
     void Update()
     {
@@ -59,7 +59,7 @@ public class BossBS2 : MonoBehaviour
 
         Vector3 origin = transform.position + (goRight ? 1f : -1f) * 0.5f * Vector3.right;
         Vector3 direction = (goRight ? 1f : -1f) * Vector3.right;
-        RaycastHit2D sideHit = Physics2D.Raycast(origin, direction, 0.3f);
+        RaycastHit2D sideHit = Physics2D.Raycast(origin, direction, 0.8f);
         Debug.DrawRay(origin, direction, Color.cyan);
 
         // Trop saturée pour finir tout de suite, mais avec le comportement que j'ai fait pour slow_attack, il faudrait que les AUTRES états se lancent au hasard, mais pas slow attack. Là tout de suite (13/11/2025, 15:03) je meurs et je m'emmêle +_+
@@ -141,18 +141,12 @@ public class BossBS2 : MonoBehaviour
         rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
     }
 
-
     private IEnumerator SlowAttack()
     {
         stopping = true;
         // Debug.Log("stopping = " + stopping);
         yield return new WaitForSeconds(2.2f);
         stopping = false;
-    }
-
-    public bool GetGoRight()
-    {
-        return goRight;
     }
 
 }
