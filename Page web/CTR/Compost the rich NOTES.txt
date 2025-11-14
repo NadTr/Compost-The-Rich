@@ -1,0 +1,82 @@
+ <div id="presentation">
+        <p>
+            Dans le cadre de notre formation chez <a href="https://interface3.be/fr" target="_blank">Interface 3</a>, nous avons participer à un Hackaton de 3 jours.<br>
+            Le but étant de rencontrer des stagiaires d'autres formations, d'élargir notre réseau et de vivre une véritable collaboration interdisciplinaire afin de développer des compétences en gestion de projet et de en travail d'équipe, tout en enrichissant notre portfolio.<br>
+            Le thème du Hackaton de cette année était la finance, un thème sérieux qui touche tout le monde.
+            Ce serait tellement plus simple s'il suffisait d'éliminer ceux qui accumulent les richesses et de tout redistribuer. Mais la réalité est plus subtile, plus tordue. Les inégalités ne viennent pas seulement des personnes riches, mais d'un système qui les crée, les nourrit et les protège. La route vers la justice sociale est longue et compliquée, alors nous avons choisi d'y répondre à notre façon : avec un petit jeu, simple mais libérateur, qui invite à réfléchir, à rire un peu, et peut-être à rêver d'un monde plus juste.
+        </p>
+    </div>
+    <div id="pitch">
+        <p>
+            Les ultra-riches ont tout pris. L'air, l'eau, les rêves, même la planète.<br>
+            Mais cette fois, le peuple se lève — poings serrés et compost prêt.<br>
+            Affronte, un par un, les milliardaires les plus indécrottables de la planète dans des combats explosifs, absurdes et jubilatoires.<br>
+            Chaque boss vaincu voit sa fortune redistribuée pour reconstruire un monde plus juste : soins gratuits, eau potable, nourriture pour tous, et chaleur humaine retrouvée.
+        </p>
+
+---------------------------------------------------------------------------------------------------------------
+Elon Musk — Le Boss Suprême du Capitalisme Galactique
+
+Pouvoir spécial : racheter des entreprises comme on achète des snacks.
+Territoire : Terre, orbite basse et bientôt Mars.
+
+Elon Musk contrôle l’électricité avec Tesla, l’espace avec SpaceX, et même les opinions avec X. Son armure est faite d’actions en bourse, et ses attaques principales sont la spéculation, les licenciements massifs et les tweets destructeurs.
+Pendant que la planète crame, il révise son plan de fuite pour Mars.
+Composte-le pour voir si, cette fois, quelque chose d’humain peut enfin pousser.
+
+---------------------------------------------------------------------------------------------------------------
+Récompenses : 
+
+La graine de la Terre
+
+Tu as libéré la terre des chaînes de l’agro-industrie.
+Les semences redeviennent libres, partagées, locales.
+Les fermes coopératives remplacent les monopoles, les marchés deviennent solidaires.
+Tu manges ce que tu fais pousser, et la planète te remercie.
+
+L’étincelle du savoir
+
+Tu as brisé les murs de l’élitisme.
+L’éducation devient accessible à tous, gratuite, ouverte.
+Les savoirs circulent sur des plateformes libres, sans pub ni algorithme de contrôle.
+Les jeunes apprennent à penser, pas à obéir — à créer, pas à consommer.
+
+Le cœur battant du soin
+
+Tu as remis la santé entre les mains de ceux qui soignent, pas de ceux qui comptent.
+Les hôpitaux publics renaissent, les médicaments essentiels ne sont plus une marchandise.
+Tu soutiens la santé mentale, la prévention, la solidarité entre soignants et patients.
+Le soin devient un droit, pas un luxe.
+
+Le souffle vert du monde
+
+Tu as fait tomber les géants du pétrole et des profits toxiques.
+Les énergies renouvelables fleurissent partout, les transports deviennent partagés.
+Les villes respirent, les forêts repoussent, les déchets fondent.
+La planète ne gémit plus — elle chante.
+
+La flamme de la culture
+
+Tu as brisé la censure des algorithmes et les murs du marketing.
+Les artistes créent librement, les médias indépendants s’élèvent.
+La culture devient une arme douce : elle questionne, elle unit, elle réveille.
+L’art ne vend plus des produits — il ouvre des consciences.
+
+Les mains du renouveau
+
+Tu as relancé les savoir-faire oubliés.
+Les ateliers locaux, les réparateurs, les coopératives reprennent vie.
+On fabrique moins, mais mieux. On travaille moins, mais ensemble.
+Chaque objet raconte une histoire, pas un rendement.
+
+---------------------------------------------------------------------------------------------------------------
+
+
+Épilogue:
+Le compost du futur
+
+Tu as vaincu le boss.
+Tu as composté l’ancien monde — et de ses débris, quelque chose pousse.
+Un monde plus juste, plus doux, plus vrai.
+Les profits sont devenus partages, la compétition s’est changée en entraide.
+Tu ne gagnes pas seul — tu gagnes avec tous les autres.
