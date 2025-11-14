@@ -62,22 +62,19 @@ public class BossBS2 : MonoBehaviour
         RaycastHit2D sideHit = Physics2D.Raycast(origin, direction, 0.8f);
         Debug.DrawRay(origin, direction, Color.cyan);
 
-        // Trop saturée pour finir tout de suite, mais avec le comportement que j'ai fait pour slow_attack, il faudrait que les AUTRES états se lancent au hasard, mais pas slow attack. Là tout de suite (13/11/2025, 15:03) je meurs et je m'emmêle +_+
-
-        if (chrono >= stateChangeEveryXSeconds)
+        if (sideHit.collider.gameObject.tag != "Wall" && sideHit.collider.gameObject.tag == "Player")
+        {
+            Debug.Log("Entered sideHit collision");
+            state = "slow_attack";
+            tesla.SetActive(true);
+            StartCoroutine(SlowAttack());
+        }
+        else if (chrono >= stateChangeEveryXSeconds)
         {
             chrono = 0;
             stateChangeEveryXSeconds = UnityEngine.Random.Range(bossData.stateChangeEveryXSecondsMin, bossData.stateChangeEveryXSecondsMax);
+            state = allBehaviors[UnityEngine.Random.Range(0, allBehaviors.Length)];
 
-            if (sideHit.collider.gameObject.tag != "Wall" && sideHit.collider.gameObject.tag == "Player")
-            {
-                Debug.Log("Entered sideHit collision");
-                state = "slow_attack";
-            }
-            else
-            {
-                state = allBehaviors[UnityEngine.Random.Range(0, allBehaviors.Length)];
-            }
             Debug.Log($"state = {state}");
             switch (state)
             {
