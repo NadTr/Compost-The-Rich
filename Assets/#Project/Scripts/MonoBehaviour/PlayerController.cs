@@ -49,6 +49,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 decalAttack;
     GameObject attack;
     bool isAttackActive;
+    bool canAttack = true; 
     
     void OnEnable()
     {
@@ -95,13 +96,13 @@ public class PlayerController : MonoBehaviour
             numberOfJumps = 2;
             animator.SetBool("on fall", false);
         }
-        Debug.Log("Tag: " + collision.gameObject.tag);
-        Debug.Log("Name: " + collision.gameObject.name);
+        // Debug.Log("Tag: " + collision.gameObject.tag);
+        // Debug.Log("Name: " + collision.gameObject.name);
         if (collision.gameObject.tag == "Boss")
             {
-                Debug.Log("Entered collision with boss");
+                // Debug.Log("Entered collision with boss");
                 BossBS2 boss = collision.gameObject.GetComponent<BossBS2>();
-                Debug.Log($"{boss != null} - {playerHealthBar != null}");
+                // Debug.Log($"{boss != null} - {playerHealthBar != null}");
                     
                 if (boss != null && playerHealthBar != null)
                 {
@@ -146,10 +147,16 @@ public class PlayerController : MonoBehaviour
     }
     private void Attack(InputAction.CallbackContext callbackContext)
     {
-        // StartCoroutine(ActiveAttack(0.3f));
-        Invoke("ActiveAttackHitBox", 0.2f);
-        attackSound.Play();
-        Invoke("ActiveAttackHitBox", 1.5f);
+        if (canAttack) 
+        {
+            // StartCoroutine(ActiveAttack(0.3f));
+            Invoke("ActiveAttackHitBox", 0.2f);
+            attackSound.Play();
+            Invoke("ActiveAttackHitBox", 1.5f);
+            canAttack =false; 
+            StartCoroutine(Cooldown());
+        }
+
     }
     private void ActiveAttackHitBox()
     {
@@ -188,4 +195,12 @@ public class PlayerController : MonoBehaviour
         }
 
     }
+
+    private IEnumerator Cooldown()
+    {
+        yield return new WaitForSeconds(0.3f);
+        canAttack = true;
+    }
+
+    
 }

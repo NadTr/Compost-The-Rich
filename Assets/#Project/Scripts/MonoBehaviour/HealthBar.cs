@@ -21,6 +21,7 @@ public class HealthBar : MonoBehaviour
     
     void Update()
     {
+        // Debug.Log("currentHealth = " + currentHealth);
         if (currentHealth <= 0)
         {
             Die();
