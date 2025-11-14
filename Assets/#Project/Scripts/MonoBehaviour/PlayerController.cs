@@ -46,6 +46,7 @@ public class PlayerController : MonoBehaviour
 
     private HealthBar playerHealthBar;
     private int currentHealth;
+    private Vector2 decalAttack;
     GameObject attack;
     bool isAttackActive;
     
@@ -80,6 +81,7 @@ public class PlayerController : MonoBehaviour
         move = actions.FindActionMap(ACTION_MAP).FindAction("Move");
         currentHealth = playerData.maxHealth;
         isAttackActive = false;
+        decalAttack = attack.transform.localPosition;
     }
     public void Update()
     {
@@ -150,6 +152,10 @@ public class PlayerController : MonoBehaviour
         isAttackActive = !isAttackActive;
         animator.SetBool("on attack", isAttackActive);
         attack.SetActive(isAttackActive);
+        if(isAttackActive){
+            float factor = GetComponent<SpriteRenderer>().flipX ? -1 : 1;
+            attack.transform.localPosition = new Vector2(decalAttack.x * factor, decalAttack.y);
+        }
     }
 
     private void OnCrouch(InputAction.CallbackContext callbackContext)
