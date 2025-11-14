@@ -2,11 +2,11 @@ using System;
 using System.Collections;
 
 // using System.Numerics;
-using NUnit.Framework.Internal;
-using UnityEditor.EditorTools;
+// using NUnit.Framework.Internal;
+// using UnityEditor.EditorTools;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SocialPlatforms.Impl;
+// using UnityEngine.SocialPlatforms.Impl;
 
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(Animator))]
@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
     private int numberOfJumps = 2;
     private bool isCrouching = false;
     private bool frontDirectionRight = false;
+    private BossBS2 boss;
 
     [Space]
     [Header("Animation")]
@@ -49,8 +50,12 @@ public class PlayerController : MonoBehaviour
     private Vector2 decalAttack;
     GameObject attack;
     bool isAttackActive;
+<<<<<<< HEAD
     bool canAttack = true; 
     
+=======
+
+>>>>>>> 17cbf81be2f7a1a0c4820e040d095f6092f402af
     void OnEnable()
     {
         actions.FindActionMap(ACTION_MAP).Enable();
@@ -99,6 +104,9 @@ public class PlayerController : MonoBehaviour
         // Debug.Log("Tag: " + collision.gameObject.tag);
         // Debug.Log("Name: " + collision.gameObject.name);
         if (collision.gameObject.tag == "Boss")
+        {
+            BossBS2 boss = collision.gameObject.GetComponent<BossBS2>();
+            if (boss != null && playerHealthBar != null)
             {
                 // Debug.Log("Entered collision with boss");
                 BossBS2 boss = collision.gameObject.GetComponent<BossBS2>();
@@ -110,6 +118,7 @@ public class PlayerController : MonoBehaviour
                     hurtSound.Play();
                 }
             }
+        }
 
     }
 
@@ -132,7 +141,7 @@ public class PlayerController : MonoBehaviour
 
         if (numberOfJumps > 1) rb.AddForce(transform.up * playerData.firstJumpForce, ForceMode2D.Impulse);
         if (numberOfJumps <= 1) rb.AddForce(transform.up * playerData.secondJumpForce, ForceMode2D.Impulse);
-        
+
         animator.SetBool("on jump", true);
         jumpSound.Play();
         Invoke("PlayerFall", 0.5f);
@@ -143,7 +152,7 @@ public class PlayerController : MonoBehaviour
     {
         animator.SetBool("on jump", false);
         animator.SetBool("on fall", true);
-        
+
     }
     private void Attack(InputAction.CallbackContext callbackContext)
     {
@@ -163,7 +172,8 @@ public class PlayerController : MonoBehaviour
         isAttackActive = !isAttackActive;
         animator.SetBool("on attack", isAttackActive);
         attack.SetActive(isAttackActive);
-        if(isAttackActive){
+        if (isAttackActive)
+        {
             float factor = GetComponent<SpriteRenderer>().flipX ? -1 : 1;
             attack.transform.localPosition = new Vector2(decalAttack.x * factor, decalAttack.y);
         }
@@ -187,7 +197,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "Boss" && isAttackActive)
         {
             HealthBar bossHealthBar = collision.gameObject.GetComponent<HealthBar>();
-            
+
             if (bossHealthBar != null)
             {
                 bossHealthBar.TakeDamage(playerData.damage);

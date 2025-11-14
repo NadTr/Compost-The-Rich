@@ -8,17 +8,17 @@ public class HealthBar : MonoBehaviour
     public Image healthBar;
     public float maxHealth = 100f;
     public float currentHealth;
-    
+
     [Header("Scenes")]
     public string gameOverSceneName = "Menu_Game_Over";
     public string winSceneName = "Menu_Victory";
-    
+
     void Start()
     {
         currentHealth = maxHealth;
         // UpdateHealthBar();
     }
-    
+
     void Update()
     {
         // Debug.Log("currentHealth = " + currentHealth);
@@ -27,21 +27,21 @@ public class HealthBar : MonoBehaviour
             Die();
         }
     }
-    
+
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
         UpdateHealthBar();
     }
-    
+
     public void Heal(float healAmount)
     {
         currentHealth += healAmount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
         UpdateHealthBar();
     }
-    
+
     void UpdateHealthBar()
     {
         if (healthBar != null)
@@ -49,7 +49,7 @@ public class HealthBar : MonoBehaviour
             healthBar.fillAmount = currentHealth / maxHealth;
         }
     }
-    
+
     void Die()
     {
         if (gameObject.CompareTag("Player"))

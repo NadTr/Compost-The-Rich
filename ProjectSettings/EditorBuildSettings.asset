@@ -10,7 +10,7 @@ EditorBuildSettings:
     guid: 9aed9f0862ee4874ea41b641b5dc487c
   - enabled: 1
     path: Assets/#Project/Scenes/#Prod/Fight1.unity
-    guid: 7002df8b8e75bda4d8a7b69b5bc1ed14
+    guid: d9219183fc947974386376798533cef8
   - enabled: 1
     path: Assets/#Project/Scenes/#Prod/Menu_Victory.unity
     guid: a7970d14e68ca6c47a7c70f35e14a0ca
