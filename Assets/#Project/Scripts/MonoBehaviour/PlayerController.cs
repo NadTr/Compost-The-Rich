@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 decalAttack;
     GameObject attack;
     bool isAttackActive;
-    
+
     void OnEnable()
     {
         actions.FindActionMap(ACTION_MAP).Enable();
@@ -95,20 +95,16 @@ public class PlayerController : MonoBehaviour
             numberOfJumps = 2;
             animator.SetBool("on fall", false);
         }
-        Debug.Log("Tag: " + collision.gameObject.tag);
-        Debug.Log("Name: " + collision.gameObject.name);
+
         if (collision.gameObject.tag == "Boss")
+        {
+            BossBS2 boss = collision.gameObject.GetComponent<BossBS2>();
+            if (boss != null && playerHealthBar != null)
             {
-                Debug.Log("Entered collision with boss");
-                BossBS2 boss = collision.gameObject.GetComponent<BossBS2>();
-                Debug.Log($"{boss != null} - {playerHealthBar != null}");
-                    
-                if (boss != null && playerHealthBar != null)
-                {
-                    playerHealthBar.TakeDamage(boss.GetDamage());
-                    hurtSound.Play();
-                }
+                playerHealthBar.TakeDamage(boss.GetDamage());
+                hurtSound.Play();
             }
+        }
 
     }
 
@@ -131,7 +127,7 @@ public class PlayerController : MonoBehaviour
 
         if (numberOfJumps > 1) rb.AddForce(transform.up * playerData.firstJumpForce, ForceMode2D.Impulse);
         if (numberOfJumps <= 1) rb.AddForce(transform.up * playerData.secondJumpForce, ForceMode2D.Impulse);
-        
+
         animator.SetBool("on jump", true);
         jumpSound.Play();
         Invoke("PlayerFall", 0.5f);
@@ -142,11 +138,10 @@ public class PlayerController : MonoBehaviour
     {
         animator.SetBool("on jump", false);
         animator.SetBool("on fall", true);
-        
+
     }
     private void Attack(InputAction.CallbackContext callbackContext)
     {
-        // StartCoroutine(ActiveAttack(0.3f));
         Invoke("ActiveAttackHitBox", 0.2f);
         attackSound.Play();
         Invoke("ActiveAttackHitBox", 1.5f);
@@ -156,7 +151,8 @@ public class PlayerController : MonoBehaviour
         isAttackActive = !isAttackActive;
         animator.SetBool("on attack", isAttackActive);
         attack.SetActive(isAttackActive);
-        if(isAttackActive){
+        if (isAttackActive)
+        {
             float factor = GetComponent<SpriteRenderer>().flipX ? -1 : 1;
             attack.transform.localPosition = new Vector2(decalAttack.x * factor, decalAttack.y);
         }
@@ -180,7 +176,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "Boss" && isAttackActive)
         {
             HealthBar bossHealthBar = collision.gameObject.GetComponent<HealthBar>();
-            
+
             if (bossHealthBar != null)
             {
                 bossHealthBar.TakeDamage(playerData.damage);
