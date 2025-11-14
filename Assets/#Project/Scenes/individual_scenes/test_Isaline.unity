@@ -764,6 +764,16 @@ RectTransform:
   m_AnchoredPosition: {x: -2173, y: -200}
   m_SizeDelta: {x: 220, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1115631026 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3158598614974440902, guid: e5c71cbe3a18f8646af9a0b67fbba68b, type: 3}
+  m_PrefabInstance: {fileID: 6633566447779111353}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1115631029 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3814994310650688786, guid: e5c71cbe3a18f8646af9a0b67fbba68b, type: 3}
+  m_PrefabInstance: {fileID: 6633566447779111353}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1158622281
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -976,22 +986,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1661093476248806481, guid: 9b0c3a59c6017e04098c92071e9d84ec, type: 3}
   m_PrefabInstance: {fileID: 2142981826}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1487962185
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1487962184}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f38f638ea245fb4881174bbf1495721, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BossBehaviorState
-  player: {fileID: 559329672}
-  spriteRenderer: {fileID: 1487962189}
-  animator: {fileID: 1487962187}
-  bossData: {fileID: 11400000, guid: bba6577a09e016d4c94c6fad1866c4d3, type: 2}
 --- !u!95 &1487962187 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 7243164485535756846, guid: 9b0c3a59c6017e04098c92071e9d84ec, type: 3}
@@ -1019,6 +1013,28 @@ MonoBehaviour:
   currentHealth: 0
   gameOverSceneName: GameOver
   winSceneName: Win
+--- !u!4 &1487962197 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1651568591959412721, guid: 9b0c3a59c6017e04098c92071e9d84ec, type: 3}
+  m_PrefabInstance: {fileID: 2142981826}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1487962198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1487962184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1333879b15e2054697e5e35b2bef9c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BossBS2
+  player: {fileID: 559329672}
+  tesla: {fileID: 1115631026}
+  spriteRenderer: {fileID: 1487962189}
+  animator: {fileID: 1487962187}
+  bossData: {fileID: 11400000, guid: bba6577a09e016d4c94c6fad1866c4d3, type: 2}
 --- !u!1 &1636439902
 GameObject:
   m_ObjectHideFlags: 0
@@ -1497,16 +1513,81 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7801121031647575451, guid: 9b0c3a59c6017e04098c92071e9d84ec, type: 3}
+    - {fileID: 7321488568495977424, guid: 9b0c3a59c6017e04098c92071e9d84ec, type: 3}
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 1651568591959412721, guid: 9b0c3a59c6017e04098c92071e9d84ec, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1115631029}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1661093476248806481, guid: 9b0c3a59c6017e04098c92071e9d84ec, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1487962185}
+      addedObject: {fileID: 1487962193}
     - targetCorrespondingSourceObject: {fileID: 1661093476248806481, guid: 9b0c3a59c6017e04098c92071e9d84ec, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1487962193}
+      addedObject: {fileID: 1487962198}
   m_SourcePrefab: {fileID: 100100000, guid: 9b0c3a59c6017e04098c92071e9d84ec, type: 3}
+--- !u!1001 &6633566447779111353
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1487962197}
+    m_Modifications:
+    - target: {fileID: 3158598614974440902, guid: e5c71cbe3a18f8646af9a0b67fbba68b, type: 3}
+      propertyPath: m_Name
+      value: TeslaPixel_0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3814994310650688786, guid: e5c71cbe3a18f8646af9a0b67fbba68b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 3814994310650688786, guid: e5c71cbe3a18f8646af9a0b67fbba68b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.0315013
+      objectReference: {fileID: 0}
+    - target: {fileID: 3814994310650688786, guid: e5c71cbe3a18f8646af9a0b67fbba68b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3814994310650688786, guid: e5c71cbe3a18f8646af9a0b67fbba68b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3814994310650688786, guid: e5c71cbe3a18f8646af9a0b67fbba68b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3814994310650688786, guid: e5c71cbe3a18f8646af9a0b67fbba68b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3814994310650688786, guid: e5c71cbe3a18f8646af9a0b67fbba68b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3814994310650688786, guid: e5c71cbe3a18f8646af9a0b67fbba68b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3814994310650688786, guid: e5c71cbe3a18f8646af9a0b67fbba68b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3814994310650688786, guid: e5c71cbe3a18f8646af9a0b67fbba68b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8150183238496321453, guid: e5c71cbe3a18f8646af9a0b67fbba68b, type: 3}
+      propertyPath: musk
+      value: 
+      objectReference: {fileID: 1487962198}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e5c71cbe3a18f8646af9a0b67fbba68b, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
