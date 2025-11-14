@@ -46,7 +46,7 @@ public class BossBehaviorState : MonoBehaviour
         speed = bossData.speedMin;
         jumpForce = bossData.jumpForceMin;
         stateChangeEveryXSeconds = bossData.stateChangeEveryXSecondsMin;
-        hp = bossData.hpMax;
+        hp = bossData.maxHealth;
     }
     void Update()
     {
@@ -63,23 +63,23 @@ public class BossBehaviorState : MonoBehaviour
             state = allBehaviors[UnityEngine.Random.Range(0, allBehaviors.Length)];
             Debug.Log($"state = {state}");
             switch (state)
-        {
-            case "walk":
-                Move();
-                break;
-            case "slow_attack":
-                ChangeSpeed();
-                break;
-            case "jump_attack":
-                Jump();
-                break;
-            case "fast_attack":
-                ChangeSpeed();
-                break;
-            default:
-                Move();
-                break;
-        }
+            {
+                case "walk":
+                    Move();
+                    break;
+                case "slow_attack":
+                    ChangeSpeed();
+                    break;
+                case "jump_attack":
+                    Jump();
+                    break;
+                case "fast_attack":
+                    ChangeSpeed();
+                    break;
+                default:
+                    Move();
+                    break;
+            }
         }
 
         Vector3 origin = transform.position + Vector3.up * 1.4f + (goRight ? 1f : -1f) * 0.5f * Vector3.right;

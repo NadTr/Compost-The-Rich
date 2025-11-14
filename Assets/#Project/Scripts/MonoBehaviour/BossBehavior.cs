@@ -36,6 +36,8 @@ public class BossBehavior : MonoBehaviour
     [SerializeField] private int hpMax = 100;
     [SerializeField] private int damage = 10;
     
+    [SerializeField] private BossData bossData;
+
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -119,4 +121,9 @@ public class BossBehavior : MonoBehaviour
 			InverseSpeed();
 		}
 	}
+
+    public int GetDamage()
+    {
+        return damage;
+    }
 }
