@@ -65,7 +65,6 @@ public class BossBS2 : MonoBehaviour
         if (sideHit.collider.gameObject != null && sideHit.collider.gameObject.tag != "Wall" && sideHit.collider.gameObject.tag == "Player")
         {
             state = "slow_attack";
-            tesla.SetActive(true);
             StartCoroutine(SlowAttack());
         }
         else if (chrono >= stateChangeEveryXSeconds)
@@ -81,8 +80,7 @@ public class BossBS2 : MonoBehaviour
                     Move();
                     break;
                 case "slow_attack":
-                    tesla.SetActive(true);
-                    StartCoroutine(SlowAttack());
+                    // StartCoroutine(SlowAttack());
                     break;
                 case "jump_attack":
                     Jump();
@@ -140,9 +138,13 @@ public class BossBS2 : MonoBehaviour
     private IEnumerator SlowAttack()
     {
         stopping = true;
+        animator.SetBool("on attack", true);
+        yield return new WaitForSeconds(1f);
+        tesla.SetActive(true);
         // Debug.Log("stopping = " + stopping);
-        yield return new WaitForSeconds(2.2f);
+        yield return new WaitForSeconds(1.5f);
         stopping = false;
+        animator.SetBool("on attack", false);
     }
 
     public int GetDamage()

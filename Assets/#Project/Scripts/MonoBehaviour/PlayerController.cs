@@ -46,6 +46,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerData playerData;
 
     private HealthBar playerHealthBar;
+    private HealthBar bossHealthBar;
     private int currentHealth;
     private Vector2 decalAttack;
     GameObject attack;
@@ -191,7 +192,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Boss" && isAttackActive)
         {
-            HealthBar bossHealthBar = collision.gameObject.GetComponent<HealthBar>();
+            bossHealthBar = collision.gameObject.GetComponent<HealthBar>();
 
             if (bossHealthBar != null)
             {
@@ -203,7 +204,7 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator Cooldown()
     {
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(1f);
         canAttack = true;
     }
 
